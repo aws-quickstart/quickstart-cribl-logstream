@@ -1,5 +1,5 @@
 
-## quickstart-cribl-cribl-logstream—Quick Start
+## quickstart-cribl-logstream—Quick Start
 
 For architectural details, step-by-step instructions, and customization options, see the [deployment guide](https://aws-quickstart.github.io/quickstart-cribl-cribl-logstream/).
 
