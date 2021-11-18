@@ -1,6 +1,6 @@
 // Include details about any licenses and how to sign up. Provide links as appropriate. If no licenses are required, clarify that. The following paragraphs provide examples of details you can provide. Remove italics, and rephrase as appropriate.
 
-_<Example 1>No licenses are required to deploy this Quick Start. All AWS service resources consumed during the launch of the Quick Start incur AWS service usage costs._
+No licenses are required to deploy this Quick Start. All AWS service resources consumed during the launch of the Quick Start incur AWS service usage costs.
 
 _<Example 2>Some configurations of the {partner-product-short-name} Quick Start involve the use of third-party software. You are responsible for obtaining a license directly from the software vendor._
 
