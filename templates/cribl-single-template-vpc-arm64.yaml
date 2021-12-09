@@ -13,11 +13,13 @@ Metadata:
           - AvailabilityZones
           - VPCCIDR
           - PublicSubnet1CIDR
+          - PublicSubnet2CIDR
+          - PrivateSubnet1CIDR
+          - PrivateSubnet2CIDR
           - VPCTenancy
       - Label:
           default: Amazon EC2 configuration
         Parameters:
-          - amiId
           - instanceType
           - AdditionalPolicies
           - webAccessCidr
@@ -28,12 +30,16 @@ Metadata:
           - QSS3KeyPrefix
           - QSS3BucketRegion
     ParameterLabels:
-      amiId:
-        default: AMI ID for custom work
       AvailabilityZones:
         default: Availability Zones
       PublicSubnet1CIDR:
         default: Public subnet 1 CIDR
+      PublicSubnet2CIDR:
+        default: Public subnet 2 CIDR
+      PrivateSubnet1CIDR:
+        default: Private subnet 1 CIDR
+      PrivateSubnet2CIDR:
+        default: Private subnet 2 CIDR
       VPCTenancy:
         default: VPC tenancy
       VPCCIDR:
@@ -46,10 +52,6 @@ Metadata:
         default: Quick Start S3 key prefix  
   cfn-lint: { config: { ignore_checks: [E9007] } }
 Parameters:
-  amiId:
-    Description: "Optional if sent an AMI to use by Cribl Support"
-    Type: String
-    Default: ''
   AvailabilityZones:
     Description: List of Availability Zones to use for the subnets in the VPC.
     Type: 'List<AWS::EC2::AvailabilityZone::Name>'
@@ -128,10 +130,10 @@ Parameters:
     Description: The AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.
     Type: String
     AllowedValues:
-      - us-west-2
       - us-east-1
       - us-east-2
       - us-west-1
+      - us-west-2
       - eu-north-1
       - ap-south-1
       - eu-west-3
@@ -143,7 +145,7 @@ Parameters:
       - ca-central-1
       - ap-southeast-1
       - ap-southeast-2
-      - eu-central-1 
+      - eu-central-1
   QSS3KeyPrefix:
     AllowedPattern: ^([0-9a-zA-Z-.]+/)*$
     ConstraintDescription: The Quick Start S3 key prefix can include numbers, lowercase letters,
@@ -188,12 +190,14 @@ Resources:
             - !Ref 'AWS::Region'
             - !Ref 'QSS3BucketRegion'
       Parameters:
-        AvailabilityZones: !Join [',', !Ref AvailabilityZones]
+        AvailabilityZones: !Join 
+          - ','
+          - !Ref AvailabilityZones
         NumberOfAZs: '2'
-        PrivateSubnet1ACIDR: !Ref PrivateSubnet1CIDR
-        PrivateSubnet2ACIDR: !Ref PrivateSubnet2CIDR
         PublicSubnet1CIDR: !Ref PublicSubnet1CIDR
         PublicSubnet2CIDR: !Ref PublicSubnet2CIDR
+        PrivateSubnet1ACIDR: !Ref PrivateSubnet1CIDR
+        PrivateSubnet2ACIDR: !Ref PrivateSubnet2CIDR
         VPCCIDR: !Ref VPCCIDR
         VPCTenancy: !Ref VPCTenancy
   CriblDeploy:
@@ -210,14 +214,14 @@ Resources:
             - !Ref 'AWS::Region'
             - !Ref 'QSS3BucketRegion'          
       Parameters:
-        amiId: !Ref amiId
         webAccessCidr: !Ref webAccessCidr
         vpcId: !GetAtt
           - VPCStack
           - Outputs.VPCID
-        subnetId: !GetAtt
-          - VPCStack
-          - Outputs.PublicSubnet1ID
+        subnetIds: !Join
+          - ','
+          - - !GetAtt VPCStack.Outputs.PublicSubnet1ID
+            - !GetAtt VPCStack.Outputs.PublicSubnet2ID
         instanceType: !Ref instanceType
         AdditionalPolicies: !Join 
           - ','
