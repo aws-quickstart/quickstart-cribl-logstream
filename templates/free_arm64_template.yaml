@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Transform: "AWS::Serverless-2016-10-31"
-Description: Cribl LogStream Free Deployment (arm64)
+Description: Cribl LogStream Free Deployment arm64 (qs-1s9hhq8an)
 
 Parameters:
   vpcId:
@@ -226,17 +226,19 @@ Resources:
                 Action:
                   - s3:GetObject
                   - s3:GetBucketLocation
-                Resource: "*"
+                Resource:
+                  - !Sub ${s3DefaultDestinationBucket.Arn}
+                  - !Sub ${s3DefaultDestinationBucket.Arn}/*
         - PolicyName: KinesisSources
           PolicyDocument:
             Version: 2012-10-17
             Statement:
               - Effect: Allow
                 Action:
-                  - kinesis:Get*
-                  - kinesis:List*
-                  - kinesis:Describe*
-                Resource: "*"
+                  - kinesis:GetRecords
+                  - kinesis:GetShardIterator
+                  - kinesis:ListShards
+                NotResource: "*"
       Tags:
         - Key: Name
           Value: Cribl LogStream IAM role
@@ -391,10 +393,10 @@ Resources:
                   "aws:ResourceTag/aws:ec2launchtemplate:id": !Ref ec2WorkerslaunchTemplate
             - Action: ["ssm:SendCommand"]
               Effect: Allow
-              Resource: !Sub "arn:aws:ssm:${AWS::Region}::document/AWS-RunShellScript"
+              Resource: !Sub "arn:${AWS::Partition}:ssm:${AWS::Region}::document/AWS-RunShellScript"
             - Action: ["autoscaling:CompleteLifecycleAction"]
               Effect: Allow
-              Resource: !Sub "arn:aws:autoscaling:${AWS::Region}:${AWS::AccountId}:autoScalingGroup:*:autoScalingGroupName/${ec2WorkersAutoScalingGroup}"
+              Resource: !Sub "arn:${AWS::Partition}:autoscaling:${AWS::Region}:${AWS::AccountId}:autoScalingGroup:*:autoScalingGroupName/${ec2WorkersAutoScalingGroup}"
             - Action: ["ssm:GetCommandInvocation"]
               Effect: Allow
               Resource: "*"
