@@ -15,7 +15,13 @@ For more information, see https://docs.aws.amazon.com/AWSCloudFormation/latest/U
 
 *A.* Launch the Quick Start templates from the links in this guide or from another S3 bucket. If you deploy the templates from a local copy on your computer or from a location other than an S3 bucket, you might encounter template-size limitations. For more information, see http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html[AWS CloudFormation quotas^].
 
+*Q.* Can I deploy this solution in a different region other than *us-west-2* ? 
+
+*A.* Yes, you can deploy in other regions that are supported in the regions listed in this document. To change the region, make sure to select the new region in the CloudFormation drop down in the AWS Console. Then, in the CloudFormation template itself, make sure to specify the region that you selected. 
 
 == Troubleshooting
 
-<Steps for troubleshooting the deployment.>
+Make sure to select TWO Availability Zones (AZ) for your deployment. Selecting one will cause the template to fail.
+
+If your leader gets terminiated, a new leader node will be spawned by the Autoscale Group. The *admin* password will change and will be the *new* instnace_id of the deployment. Simply use that password to log into your Cribl LogStream Leader Node. Additionally, you can now use a git repo to backup your configurations. GitOps on Cribl https://docs.cribl.io/logstream/gitops/
+

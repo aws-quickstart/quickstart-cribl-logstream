@@ -8,7 +8,27 @@ project:
     - us-west-1
     - us-west-2
 tests:
-  default:
+  simple:
     template: ./templates/cribl-single-template.yaml
     regions: 
+      - us-west-2
+  newvpcX86:
+    template: ./templates/cribl-single-template-vpc.yaml
+    regions:
+      - us-west-2
+  newvpcloggingX86:
+    template: ./templates/cribl-single-template-vpc-logging.yaml
+    regions:
+      - us-west-2 
+  simple:
+    template: ./templates/cribl-single-template-arm64.yaml
+    regions:
+      - us-west-2
+  newvpcX86:
+    template: ./templates/cribl-single-template-vpc-arm64.yaml
+    regions:
+      - us-west-2
+  newvpcloggingX86:
+    template: ./templates/cribl-single-template-vpc-logging-arm64.yaml
+    regions:
       - us-west-2

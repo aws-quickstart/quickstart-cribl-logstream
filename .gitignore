@@ -7,5 +7,7 @@ docs/steps/lambda_push/.DS_Store
 docs/steps/.DS_Store
 cribl/.DS_Store
 ci/.taskcat_overrides.yml
-taskcat_outputs/tCaT-aws-quickstart-cribl-logstream-default-6e04b46035364902bbbe3de7f0b92343-us-west-2-cfnlogs.txt
-taskcat_outputs/index.html
+taskcat_outputs/
+.DS_Store
+.taskcat_overrides.yml
+.taskcat.yml
