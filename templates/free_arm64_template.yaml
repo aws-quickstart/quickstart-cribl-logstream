@@ -112,7 +112,7 @@ Mappings:
     ARM64: ami-0a1ac0d02a92ae6ee
   us-west-2:
     ARM64: ami-0d7e5fcb5ac1abd79
-
+    
 Resources:
   ec2SingleSecurityGroup:
     Type: AWS::EC2::SecurityGroup
