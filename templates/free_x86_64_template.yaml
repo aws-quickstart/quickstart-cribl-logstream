@@ -130,6 +130,53 @@ Resources:
           CidrIp: 0.0.0.0/0
           Description: Egress access
 
+  LoadBalancerExternal:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Type: application
+      Scheme: internet-facing
+      IpAddressType: ipv4
+      SecurityGroups:
+        - !Ref ec2SingleSecurityGroup
+      Subnets:
+       - !Select [0, !Ref 'subnetIds']
+       - !Select [1, !Ref 'subnetIds']
+  
+  CriblTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    DependsOn: LoadBalancerExternal
+    Properties:
+      HealthCheckPort: '9000'
+      HealthCheckProtocol: HTTP
+      Port: 9000
+      Protocol: HTTP
+      TargetType: instance
+      VpcId: !Ref vpcId
+  
+  CriblWebListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref CriblTargetGroup
+      LoadBalancerArn: !Ref LoadBalancerExternal
+      Port: 9000
+      Protocol: HTTP
+
+  CriblWebListenerRule1:
+    Type: AWS::ElasticLoadBalancingV2::ListenerRule
+    Properties:
+      Actions:
+        - Type: forward
+          TargetGroupArn: !Ref CriblTargetGroup
+      Conditions:
+        - Field: http-request-method
+          HttpRequestMethodConfig:
+            Values:
+              - GET_OR_HEAD
+      ListenerArn: !Ref CriblWebListener
+      Priority: 1
+
   s3DefaultDestinationBucket:
     Type: AWS::S3::Bucket
     Properties:
@@ -192,7 +239,7 @@ Resources:
                 Resource: "*"
       Tags:
         - Key: Name
-          Value: Cribl LogStream  IAM role
+          Value: Cribl LogStream IAM role
 
   iamDefaultInstanceProfile:
     Type: AWS::IAM::InstanceProfile
@@ -201,43 +248,21 @@ Resources:
       Roles:
         - !Ref LogstreamRole
 
-  ec2SingleInstance:
-    Type: AWS::EC2::Instance
-    Properties:
-      ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", HVM64]
-      InstanceType: !Ref instanceType
-      IamInstanceProfile: !Ref iamDefaultInstanceProfile
-      SecurityGroupIds:
-        - !Ref ec2SingleSecurityGroup
-      UserData: !Base64
-        Fn::Sub:
-          - |
-              #cloud-config
-              runcmd: 
-                - /usr/local/bin/configure_logstream.sh -m single -b ${s3DefaultDestinationBucket}
-                - sleep 10
-                - cloud-init query -f "$(cat /opt/cribl_build/users.json.j2)" > /opt/cribl/local/cribl/auth/users.json
-                - chown -R cribl:cribl /opt/cribl
-          - s3DefaultDestinationBucket: !Ref s3DefaultDestinationBucket
-      Tags:
-        - Key: Name
-          Value: Cribl LogStream Single Instance
-        - Key: Purpose
-          Value: Machine data analysis
-
   ec2WorkersAutoScalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
     Properties:
+      VPCZoneIdentifier:
+       - !Select [0, !Ref 'subnetIds']
+       - !Select [1, !Ref 'subnetIds']
+      TargetGroupARNs: 
+        - !Ref CriblTargetGroup
       DesiredCapacity: "1"
       MaxSize: "1"
-      MinSize: "1"
+      MinSize: "0"
       HealthCheckType: EC2
       LaunchTemplate:
         LaunchTemplateId: !Ref ec2WorkerslaunchTemplate
         Version: !GetAtt ec2WorkerslaunchTemplate.LatestVersionNumber
-      VPCZoneIdentifier:
-        - !Select [0, !Ref subnetIds]
-        - !Select [1, !Ref subnetIds]
       Tags:
         - Key: Name
           Value: Cribl LogStream Worker Nodes ASG
@@ -265,21 +290,21 @@ Resources:
           - !Ref ec2SingleSecurityGroup
         UserData: !Base64
           Fn::Sub:
-              |
+            - |
               #cloud-config
-
               runcmd:
                 - /usr/local/bin/configure_logstream.sh -m single -b ${s3DefaultDestinationBucket}
                 - sleep 10
                 - cloud-init query -f "$(cat /opt/cribl_build/users.json.j2)" > /opt/cribl/local/cribl/auth/users.json
                 - chown -R cribl:cribl /opt/cribl
-                
+            - s3DefaultDestinationBucket: !Ref s3DefaultDestinationBucket                
         TagSpecifications:
           - ResourceType: instance
             Tags:
               - Key: Name
                 Value: Cribl LogStream Worker Instance
-
+              - Key: Purpose
+                Value: Machine data analysis 
   workerShutdownEventRule:
     Type: AWS::Events::Rule
     Properties:
@@ -379,11 +404,8 @@ Resources:
 
 Outputs:
   logstreamWebUrlPublic:
-    Value: !Sub http://${ec2SingleInstance.PublicIp}:9000/login
+    Value: !Sub http://${LoadBalancerExternal.DNSName}:9000/login
     Description: Cribl LogStream Web URL (PublicIp)
   logstreamWebAccessCreds:
-    Value: !Sub "admin / ${ec2SingleInstance}"
+    Value: "admin / EC2 Instance ID"
     Description: Default Web Access Credentials
-  stackName:
-    Value: !Sub "${AWS::StackName}"
-    Description: CFN Stack Name

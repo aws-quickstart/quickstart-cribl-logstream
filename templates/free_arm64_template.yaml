@@ -1,13 +1,13 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Transform: "AWS::Serverless-2016-10-31"
-Description: Cribl LogStream Free Deployment arm64 (qs-1s9hhq8an)
+Description: Cribl LogStream Free Deployment (arm64)
 
 Parameters:
   vpcId:
     Description: "REQUIRED: ID of your existing VPC."
     Type: AWS::EC2::VPC::Id
   subnetIds:
-    Description: "REQUIRED: List of 2 subnet Ids in different AZs. These subnets must be in the same VPC as VPC ID above."
+    Description: "REQUIRED: ID of one of your existing Subnet IDs. This subnet must be in the same VPC as VPC ID above."
     Type: List<AWS::EC2::Subnet::Id>
   webAccessCidr:
     Type: String
@@ -112,7 +112,7 @@ Mappings:
     ARM64: ami-0a1ac0d02a92ae6ee
   us-west-2:
     ARM64: ami-0d7e5fcb5ac1abd79
-    
+
 Resources:
   ec2SingleSecurityGroup:
     Type: AWS::EC2::SecurityGroup
@@ -226,19 +226,17 @@ Resources:
                 Action:
                   - s3:GetObject
                   - s3:GetBucketLocation
-                Resource:
-                  - !Sub ${s3DefaultDestinationBucket.Arn}
-                  - !Sub ${s3DefaultDestinationBucket.Arn}/*
+                Resource: "*"
         - PolicyName: KinesisSources
           PolicyDocument:
             Version: 2012-10-17
             Statement:
               - Effect: Allow
                 Action:
-                  - kinesis:GetRecords
-                  - kinesis:GetShardIterator
-                  - kinesis:ListShards
-                NotResource: "*"
+                  - kinesis:Get*
+                  - kinesis:List*
+                  - kinesis:Describe*
+                Resource: "*"
       Tags:
         - Key: Name
           Value: Cribl LogStream IAM role
@@ -393,10 +391,10 @@ Resources:
                   "aws:ResourceTag/aws:ec2launchtemplate:id": !Ref ec2WorkerslaunchTemplate
             - Action: ["ssm:SendCommand"]
               Effect: Allow
-              Resource: !Sub "arn:${AWS::Partition}:ssm:${AWS::Region}::document/AWS-RunShellScript"
+              Resource: !Sub "arn:aws:ssm:${AWS::Region}::document/AWS-RunShellScript"
             - Action: ["autoscaling:CompleteLifecycleAction"]
               Effect: Allow
-              Resource: !Sub "arn:${AWS::Partition}:autoscaling:${AWS::Region}:${AWS::AccountId}:autoScalingGroup:*:autoScalingGroupName/${ec2WorkersAutoScalingGroup}"
+              Resource: !Sub "arn:aws:autoscaling:${AWS::Region}:${AWS::AccountId}:autoScalingGroup:*:autoScalingGroupName/${ec2WorkersAutoScalingGroup}"
             - Action: ["ssm:GetCommandInvocation"]
               Effect: Allow
               Resource: "*"

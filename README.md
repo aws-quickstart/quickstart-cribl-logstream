@@ -40,7 +40,7 @@ You are responsible for the cost of the AWS services used while running this Qui
 
 ## Architecture
 
-![Architecture](/docs/images/architecture_diagram.png)
+![Architecture](docs/images/Cribl_AWS_Single.png)
 
 To post feedback, submit feature ideas, or report bugs, use the [**Issues**](https://github.com/amiracle/quick-start-cribl/issues) section of this [GitHub repo](https://github.com/amiracle/quick-start-cribl).
 
