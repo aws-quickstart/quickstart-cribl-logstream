@@ -36,6 +36,10 @@ Parameters:
       - m6gd.4xlarge
     ConstraintDescription: Must contain valid instance type
 Metadata:
+  cfn-lint:
+    config:
+      configure_rules:
+        RuleId: E9007
   AWS::CloudFormation::Interface:
     ParameterGroups:
       - Label:

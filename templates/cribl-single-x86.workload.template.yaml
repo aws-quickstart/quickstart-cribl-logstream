@@ -36,6 +36,10 @@ Parameters:
       - c5ad.large
     ConstraintDescription: Must contain valid instance type  
 Metadata:
+  cfn-lint:
+    config:
+      configure_rules:
+        RuleId: E9007
   AWS::CloudFormation::Interface:
     ParameterGroups:
       - Label:
@@ -103,11 +107,6 @@ Mappings:
 Resources:
   ec2SingleSecurityGroup:
     Type: AWS::EC2::SecurityGroup
-    Metadata:
-      cfn-lint:
-        config:
-          ignore_checks:
-            - E9007
     Properties:
       GroupDescription: Cribl LogStream Access
       VpcId: !Ref vpcId
