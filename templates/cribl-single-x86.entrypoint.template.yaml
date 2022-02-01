@@ -128,9 +128,9 @@ Resources:
       TemplateURL: !Sub 
       - https://${S3Bucket}.s3.${QSS3BucketRegion}.${AWS::URLSuffix}/${QSS3KeyPrefix}/cribl-single-x86.workload.template.yaml
       - S3Bucket: !If
-          - UsingDefaultBucket
-          - !Sub 'aws-quickstart-cribl-logstream-${QSS3BucketRegion}'
-          - !Ref QSS3BucketName
+           - UsingDefaultBucket
+           - !Sub '${QSS3BucketName}-${QSS3BucketRegion}'
+           - !Ref QSS3BucketName
       Parameters:
         webAccessCidr: !Ref webAccessCidr
         vpcId: !Ref vpcId

@@ -12,3 +12,5 @@ taskcat_outputs/
 .taskcat_overrides.yml
 .DS_Store
 templates/cribl-single-arm64-new-vpc-logging.template.conditional.yaml
+.DS_Store
+.taskcat/.remote_templates

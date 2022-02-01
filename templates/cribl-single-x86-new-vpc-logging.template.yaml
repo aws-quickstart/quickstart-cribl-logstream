@@ -217,7 +217,7 @@ Resources:
         - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/quickstart-linux-bastion/submodules/quickstart-aws-vpc/templates/aws-vpc.template.yaml
         - S3Bucket: !If
             - UsingDefaultBucket
-            - !Sub 'aws-quickstart-${QSS3BucketRegion}'
+            - !Sub '${QSS3BucketName}-${QSS3BucketRegion}'
             - !Ref 'QSS3BucketName'
           S3Region: !If
             - UsingDefaultBucket
@@ -337,9 +337,9 @@ Resources:
       TemplateURL: !Sub 
       - https://${S3Bucket}.s3.${QSS3BucketRegion}.${AWS::URLSuffix}/${QSS3KeyPrefix}/cribl-single-x86.workload.template.yaml
       - S3Bucket: !If
-          - UsingDefaultBucket
-          - !Sub 'aws-quickstart-cribl-logstream-${QSS3BucketRegion}'
-          - !Ref QSS3BucketName
+           - UsingDefaultBucket
+           - !Sub '${QSS3BucketName}-cribl-logstream-${QSS3BucketRegion}'
+           - !Ref QSS3BucketName
       Parameters:
         webAccessCidr: !Ref webAccessCidr
         vpcId: !GetAtt
