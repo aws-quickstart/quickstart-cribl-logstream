@@ -11,9 +11,9 @@ This Quick Start deployment builds a new AWS environment consisting of the infra
 
 | VPC | ARM64 | x86_64 |
 | --- | ---- | ---- |
-| Deploy in an existing VPC | [Cribl LogStream ARM64](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create/template?stackName=Cribl-LogStream&templateURL=https://aws-quickstart-cribl-logstream-us-west-2.s3.us-west-2.amazonaws.com/logstream/cribl-single-template-arm64.yaml) | [Cribl LogStream x86_64](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create/template?stackName=Cribl-LogStream&templateURL=https://aws-quickstart-cribl-logstream-us-west-2.s3.us-west-2.amazonaws.com/logstream/cribl-single-template.yaml) |
-| Deploy in a new VPC | [Cribl LogStream ARM64](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create/template?stackName=Cribl-LogStream&templateURL=https://aws-quickstart-cribl-logstream-us-west-1.s3.us-west-1.amazonaws.com/logstream/cribl-single-template-vpc-arm64.yaml) | [Cribl LogStream x86_64](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create/template?stackName=Cribl-LogStream&templateURL=https://aws-quickstart-cribl-logstream-us-west-1.s3.us-west-1.amazonaws.com/logstream/cribl-single-template-vpc.yaml) |
-| Deploy in new VPC with Flow Logs to s3 enabled | [Cribl LogStream ARM64](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create/template?stackName=Cribl-LogStream&templateURL=https://aws-quickstart-cribl-logstream-us-west-2.s3.us-west-2.amazonaws.com/logstream/cribl-single-template-vpc-logging-arm64.yaml) | [Cribl LogStream x86_64](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create/template?stackName=Cribl-LogStream&templateURL=https://aws-quickstart-cribl-logstream-us-west-2.s3.us-west-2.amazonaws.com/logstream/cribl-single-template-vpc-logging.yaml) | 
+| Deploy in an existing VPC | [Cribl LogStream ARM64](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create/template?stackName=Cribl-LogStream&templateURL=https://aws-quickstart-cribl-logstream-us-west-2.s3.us-west-2.amazonaws.com/logstream/cribl-single-arm64.entrypoint.template.yaml) | [Cribl LogStream x86_64](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create/template?stackName=Cribl-LogStream&templateURL=https://aws-quickstart-cribl-logstream-us-west-2.s3.us-west-2.amazonaws.com/logstream/cribl-single-x86.entrypoint.template.yaml) |
+| Deploy in a new VPC | [Cribl LogStream ARM64](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create/template?stackName=Cribl-LogStream&templateURL=https://aws-quickstart-cribl-logstream-us-west-1.s3.us-west-1.amazonaws.com/logstream/cribl-single-arm64-new-vpc.template.yaml) | [Cribl LogStream x86_64](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create/template?stackName=Cribl-LogStream&templateURL=https://aws-quickstart-cribl-logstream-us-west-1.s3.us-west-1.amazonaws.com/logstream/cribl-single-x86-new-vpc.template.yaml) |
+| Deploy in new VPC with Flow Logs to s3 enabled | [Cribl LogStream ARM64](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create/template?stackName=Cribl-LogStream&templateURL=https://aws-quickstart-cribl-logstream-us-west-2.s3.us-west-2.amazonaws.com/logstream/cribl-single-arm64-new-vpc-logging.template.yaml) | [Cribl LogStream x86_64](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create/template?stackName=Cribl-LogStream&templateURL=https://aws-quickstart-cribl-logstream-us-west-2.s3.us-west-2.amazonaws.com/logstream/cribl-single-x86-new-vpc-logging.template.yaml) | 
 
 4. Deploy the stack in your environment, make sure to check the region as this defaults to **Oregon (us-west-2)**. 
 5. Log into Cribl LogStream with the credential supplied in the nested **CriblDeploy** "Outputs" tab on your CloudFormation stack.
@@ -40,9 +40,9 @@ You are responsible for the cost of the AWS services used while running this Qui
 
 ## Architecture
 
-![Architecture](/docs/images/architecture_diagram.png)
+![Architecture](docs/images/Cribl_AWS_Single.png)
 
-To post feedback, submit feature ideas, or report bugs, use the [**Issues**](https://github.com/amiracle/quick-start-cribl/issues) section of this [GitHub repo](https://github.com/amiracle/quick-start-cribl).
+To post feedback, submit feature ideas, or report bugs, use the [**Issues**](https://github.com/amiracle/quick-start-cribl/issues) section of this [GitHub repo](https://github.com/aws-quickstart/quickstart-cribl-logstream).
 
 To submit code for this Quick Start, see the [AWS Quick Start Contributor's Kit](https://aws-quickstart.github.io/).
 
@@ -52,3 +52,7 @@ To submit code for this Quick Start, see the [AWS Quick Start Contributor's Kit]
 - [Cribl Docs on Single Instance Deployments](https://docs.cribl.io/docs/deploy-single-instance)
 - [Cribl Docs on Distributed Deployments](https://docs.cribl.io/docs/deploy-distributed)
 - [Cribl Docs on sizing and scaling instances](https://docs.cribl.io/docs/scaling)
+- [Cribl Docs on AWS Cross-Account Data Collection](https://docs.cribl.io/logstream/usecase-aws-x-account)
+- [Cribl Docs Sources](https://docs.cribl.io/logstream/sources)
+- [Cribl Docs Destinations](https://docs.cribl.io/logstream/destinations)
+- [Cribl Integrations](https://cribl.io/integrations/)

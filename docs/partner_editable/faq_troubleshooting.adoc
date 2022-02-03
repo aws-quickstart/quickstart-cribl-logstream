@@ -19,6 +19,16 @@ For more information, see https://docs.aws.amazon.com/AWSCloudFormation/latest/U
 
 *A.* Yes, you can deploy in other regions that are supported in the regions listed in this document. To change the region, make sure to select the new region in the CloudFormation drop down in the AWS Console. Then, in the CloudFormation template itself, make sure to specify the region that you selected. 
 
+*Q.* Can I modify the EC2 IAM Policy to include other S3 buckets, Kinesis Streams or other AWS resources for my instance to access? 
+
+*A.* Yes, you can modify the EC2 IAM Policy to include other resources you want the Cribl LogStream instance to access. Please refer to https://docs.cribl.io/logstream/sources-s3#s3-and-sqs-permissions for S3 / SQS permissions and https://docs.cribl.io/logstream/sources-kinesis-streams#authentication for Kinesis permissions.
+
+*Q.* Where can I see the outputs when I deploy a New VPC or New VPC + Logging Cloudformation template?
+*A.* When you deploy this stack, you will actually deploy a **VPC** and **CriblDeploy** templates, just go to the **CriblDeploy** template to see the URL for your Cribl Login. You will still need to use the AMI Instance ID as the password.
+
+*Q.* My instance was rebuilt by the autoscale group and I can no longer log into my instance, what's the new password?
+*A.* When your instance gets rebuilt by the AutoScale Group, the password is reset to the new AMI Instance ID. 
+
 == Troubleshooting
 
 Make sure to select TWO Availability Zones (AZ) for your deployment. Selecting one will cause the template to fail.

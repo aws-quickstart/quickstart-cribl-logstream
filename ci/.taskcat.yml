@@ -3,32 +3,22 @@ project:
   owner: quickstart-eng@amazon.com
   package_lambda: false
   regions:
-    - us-east-1
-    - us-east-2
-    - us-west-1
     - us-west-2
+  parameters: 
+      instanceType: c6g.large
+      webAccessCidr: 0.0.0.0/0
+      QSS3KeyPrefix: logstream/
+      QSS3BucketRegion: us-west-2
+      QSS3BucketName: aws-quickstart
 tests:
-  simple:
-    template: ./templates/cribl-single-template.yaml
-    regions: 
-      - us-west-2
-  newvpcX86:
-    template: ./templates/cribl-single-template-vpc.yaml
-    regions:
-      - us-west-2
-  newvpcloggingX86:
-    template: ./templates/cribl-single-template-vpc-logging.yaml
-    regions:
-      - us-west-2 
-  simple:
-    template: ./templates/cribl-single-template-arm64.yaml
-    regions:
-      - us-west-2
-  newvpcX86:
-    template: ./templates/cribl-single-template-vpc-arm64.yaml
-    regions:
-      - us-west-2
-  newvpcloggingX86:
-    template: ./templates/cribl-single-template-vpc-logging-arm64.yaml
-    regions:
-      - us-west-2
+  cribl-deploy-new-vpc-arm:
+    parameters: 
+      AvailabilityZones: $[taskcat_getaz_2]
+      VPCCIDR: 10.0.0.0/16
+      PublicSubnet1CIDR: 10.0.128.0/20
+      PublicSubnet2CIDR: 10.0.144.0/20
+      PrivateSubnet1CIDR: 10.0.0.0/19
+      PrivateSubnet2CIDR: 10.0.32.0/19
+      VPCTenancy: default
+      QSS3BucketRegion: $[taskcat_current_region]
+    template: templates/cribl-single-arm64-new-vpc.template.yaml
