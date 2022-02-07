@@ -26,21 +26,13 @@ This deployment takes approximately 10 minutes to complete. For more information
 
 >Make sure to select TWO Availability Zones (AZ) for your deployment. Selecting one will cause the template to fail.
 ---
-
-## Use Cases
-Cribl LogStream can optimize the collection of :
- - [VPC Flow Logs](/docs/steps/vpcflowlogs2metrics.md)
- - [CloudWatch Streaming Metrics](/docs/steps/cloudwatchmetrics.md)  
- - [CloudTrail logs](/docs/steps/cloudtrail.md) 
- - [Collect and send to an S3 bucket](/docs/steps/s3bucket.md) 
-
 ## Pricing
 
 You are responsible for the cost of the AWS services used while running this Quick Start reference deployment. There is no additional cost for using the Quick Start. For Cribl LogStream pricing information, see the [Cribl website](https://cribl.io/cribl-logstream-pricing/).
 
 ## Architecture
 
-![Architecture](docs/images/Cribl_AWS_Single.png)
+![Architecture](docs_tbd/images/architecture_diagram.png)
 
 To post feedback, submit feature ideas, or report bugs, use the [**Issues**](https://github.com/amiracle/quick-start-cribl/issues) section of this [GitHub repo](https://github.com/aws-quickstart/quickstart-cribl-logstream).
 
