@@ -1,26 +1,50 @@
-# quickstart-aws-sitecore-xp
-## Sitecore XP on AWS
+# Cribl LogStream on Amazon - Quick Start
+This Quick Start guide was created by [Cribl](https://cribl.io) to help automate the deployment of [Cribl LogStream](https://cribl.io/logstream/) in your AWS environment. These  automated reference deployments use AWS CloudFormation templates to deploy EC2 instances, IAM policies and S3 buckets, following AWS best practices. 
 
-The Sitecore Experience Platform (XP) is a content management system (CMS) for web content that automates marketing to deliver a personalized user experience. This Quick Start is intended for organizations that want to deploy a multirole Sitecore XP architecture on the AWS Cloud. 
+## Deployment
+This Quick Start deployment builds a new AWS environment consisting of the infrastructure resources required to provision Cribl LogStream. 
 
-Supported versions <=10.2
+### Steps 
+1. If you don't already have an AWS account, sign up at https://aws.amazon.com, and sign into your account.
+2. Subscribe to the free offering of [Cribl LogStream on the AWS Marketplace](https://aws.amazon.com/marketplace/pp/prodview-3wsytwvqb65gg?sr=0-1&ref_=beagle&applicationId=AWSMPContessa). Once you're subscribed, continue to the next step. 
+3.  Select your deployment method:
 
-It deploys 12 roles that compose the complete Sitecore XP platform. All of the roles are deployed into individual Auto Scaling groups to ensure recoverability when an instance fails. Database services are provided by SQL Server through Amazon Relational Database Service (Amazon RDS), and caching is managed by Redis on Amazon ElastiCache.
+| VPC | ARM64 | x86_64 |
+| --- | ---- | ---- |
+| Deploy in an existing VPC | [Cribl LogStream ARM64](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create/template?stackName=Cribl-LogStream&templateURL=https://aws-quickstart-cribl-logstream-us-west-2.s3.us-west-2.amazonaws.com/logstream/cribl-single-arm64.entrypoint.template.yaml) | [Cribl LogStream x86_64](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create/template?stackName=Cribl-LogStream&templateURL=https://aws-quickstart-cribl-logstream-us-west-2.s3.us-west-2.amazonaws.com/logstream/cribl-single-x86.entrypoint.template.yaml) |
+| Deploy in a new VPC | [Cribl LogStream ARM64](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create/template?stackName=Cribl-LogStream&templateURL=https://aws-quickstart-cribl-logstream-us-west-1.s3.us-west-1.amazonaws.com/logstream/cribl-single-arm64-new-vpc.template.yaml) | [Cribl LogStream x86_64](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create/template?stackName=Cribl-LogStream&templateURL=https://aws-quickstart-cribl-logstream-us-west-1.s3.us-west-1.amazonaws.com/logstream/cribl-single-x86-new-vpc.template.yaml) |
+| Deploy in new VPC with Flow Logs to s3 enabled | [Cribl LogStream ARM64](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create/template?stackName=Cribl-LogStream&templateURL=https://aws-quickstart-cribl-logstream-us-west-2.s3.us-west-2.amazonaws.com/logstream/cribl-single-arm64-new-vpc-logging.template.yaml) | [Cribl LogStream x86_64](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create/template?stackName=Cribl-LogStream&templateURL=https://aws-quickstart-cribl-logstream-us-west-2.s3.us-west-2.amazonaws.com/logstream/cribl-single-x86-new-vpc-logging.template.yaml) | 
 
-To control access, this deployment uses AWS Certificate Manager (ACM) and AWS Secrets Manager. Other services used by this Quick Start include Amazon Simple Storage Service (Amazon S3), AWS Systems Manager, Amazon CloudWatch, AWS Lambda, and Amazon Route 53.
+4. Deploy the stack in your environment, make sure to check the region as this defaults to **Oregon (us-west-2)**. 
+5. Log into Cribl LogStream with the credential supplied in the nested **CriblDeploy** "Outputs" tab on your CloudFormation stack.
 
-You can use the AWS CloudFormation templates included with the Quick Start to deploy Sitecore XP in your AWS account in about 1–1.5 hours. For more information and step-by-step deployment instructions, see [the guide](https://fwd.aws/yW5pE).
+---
+>#### Tips for Deployment
 
-This Quick Start provides two deployment options:
+>By default this CloudFormation template will deploy in **Oregon (us-west-2)**, but if you want to change the region simply change the region in your CloudFormation drop down and then in the template itself update the ***QSS3BucketRegion*** variable from ***us-west-2*** to your region of choice.
+This deployment takes approximately 10 minutes to complete. For more information and step-by-step deployment instructions, see the deployment guide.
 
-- Deploy Sitecore XP into a new VPC (end-to-end deployment). This option builds a new AWS environment consisting of the VPC, subnets, NAT gateways, security groups, bastion hosts, and other infrastructure components. It then deploys Sitecore XP into this new VPC.
-- Deploy Sitecore XP into an existing VPC. This option provisions Sitecore XP in your existing AWS infrastructure.
-The Quick Start provides separate templates for these options. It also lets you configure Classless Inter-Domain Routing (CIDR) blocks, instance types, and Sitecore XP settings, as discussed later in this guide.
+>Make sure to select TWO Availability Zones (AZ) for your deployment. Selecting one will cause the template to fail.
+---
+## Pricing
 
-The following diagram shows the architecture for Sitecore XP.
+You are responsible for the cost of the AWS services used while running this Quick Start reference deployment. There is no additional cost for using the Quick Start. For Cribl LogStream pricing information, see the [Cribl website](https://cribl.io/cribl-logstream-pricing/).
 
-![Quick Start architecture for Sitecore XP](https://d0.awsstatic.com/partner-network/QuickStart/datasheets/sitecore-xp-93-architecture-diagram.png)
+## Architecture
 
-For architectural details, best practices, step-by-step instructions, and customization options, see the [deployment guide](https://fwd.aws/yW5pE).
+![Architecture](docs/deployment_guide/images/architecture_diagram.png)
 
-To post feedback, submit feature ideas, or report bugs, use the **Issues** section of this GitHub repo. If you'd like to submit code for this Quick Start, please review the [AWS Quick Start Contributor's Kit](https://aws-quickstart.github.io/).
+To post feedback, submit feature ideas, or report bugs, use the [**Issues**](https://github.com/amiracle/quick-start-cribl/issues) section of this [GitHub repo](https://github.com/aws-quickstart/quickstart-cribl-logstream).
+
+To submit code for this Quick Start, see the [AWS Quick Start Contributor's Kit](https://aws-quickstart.github.io/).
+
+### Additional Cribl Resources
+- [Cribl Community](https://cribl.io/community) 
+- [Cribl Resources](https://cribl.io/resources)
+- [Cribl Docs on Single Instance Deployments](https://docs.cribl.io/docs/deploy-single-instance)
+- [Cribl Docs on Distributed Deployments](https://docs.cribl.io/docs/deploy-distributed)
+- [Cribl Docs on sizing and scaling instances](https://docs.cribl.io/docs/scaling)
+- [Cribl Docs on AWS Cross-Account Data Collection](https://docs.cribl.io/logstream/usecase-aws-x-account)
+- [Cribl Docs Sources](https://docs.cribl.io/logstream/sources)
+- [Cribl Docs Destinations](https://docs.cribl.io/logstream/destinations)
+- [Cribl Integrations](https://cribl.io/integrations/)
