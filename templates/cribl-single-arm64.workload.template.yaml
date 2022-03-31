@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: 2010-09-09
+AWSTemplateFormatVersion: "2010-09-09"
 Transform: "AWS::Serverless-2016-10-31"
 Description: Cribl LogStream Free Deployment arm64 (qs-1skh1tk5t)
 Parameters:
@@ -13,6 +13,10 @@ Parameters:
     AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/([0-9]|[1-2][0-9]|3[0-2]))$
     ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/x
     Description: "REQUIRED: The CIDR IP range permitted to access the LogStream web console. We recommend you set this value to a trusted IP range."
+  SQS:
+    Description: Name of the SQS for VPCFlow Logs.
+    Type: String
+    Default: cribl-vpc-sqs
   instanceType:
     Description: EC2 instance type to provision the LogStream instance. If none specified, c6g.2xlarge will be used.
     Type: String
@@ -48,6 +52,7 @@ Metadata:
           default: Instance Configuration
         Parameters:
           - instanceType
+          - SQS
       - Label:
           default: Network Configuration
         Parameters:
@@ -57,6 +62,8 @@ Metadata:
     ParameterLabels:
       instanceType:
         default: EC2 Instance Type
+      SQS:
+        default: SQS For VPC Flow
       vpcId:
         default: VPC ID
       subnetIds:
@@ -75,37 +82,37 @@ Rules:
 Mappings:
  RegionMap:
   ap-northeast-1:
-    ARM64: ami-06629cc3dfd0ffd64
+    ARM64: ami-089cf28c01e447dc4
   ap-northeast-2:
-    ARM64: ami-070ff9c97da5e6a16
+    ARM64: ami-00a8c391e875d3e8f
   ap-south-1:
-    ARM64: ami-0941af0306ce68e53
+    ARM64: ami-05bad86d8e45f2b53
   ap-southeast-1:
-    ARM64: ami-033b4cc0061624cc0
+    ARM64: ami-065d44eb4d87d184d
   ap-southeast-2:
-    ARM64: ami-000a13ba2ddd6b687
+    ARM64: ami-0a462f896ca85bdc8
   ca-central-1:
-    ARM64: ami-0f125902e253b4938
+    ARM64: ami-00eacd1ef07a710dd
   eu-central-1:
-    ARM64: ami-0ae685389d3ea1860
+    ARM64: ami-0f9bbec03eb9c05a5
   eu-north-1:
-    ARM64: ami-0b2a1252e47b6723d
+    ARM64: ami-0f9f16d9d8e6137dd
   eu-west-1:
-    ARM64: ami-0a4efeb3256b1cede
+    ARM64: ami-00b0e17230e5c1432
   eu-west-2:
-    ARM64: ami-05c7ec74924409050
+    ARM64: ami-0dc935426f5b5974c
   eu-west-3:
-    ARM64: ami-04c2979ac6d16098a
+    ARM64: ami-00158cea70cbcdb9f
   sa-east-1:
-    ARM64: ami-0af964308c9e6ab2f
+    ARM64: ami-03b8bd38071662914
   us-east-1:
-    ARM64: ami-000e7f4cbc7b395ae
+    ARM64: ami-0c1edd67b0134d9b8
   us-east-2:
-    ARM64: ami-05be26b9031fa8787
+    ARM64: ami-06b34bffc9d4cdf53
   us-west-1:
-    ARM64: ami-0a1ac0d02a92ae6ee
+    ARM64: ami-0de7551e1ec1c7698
   us-west-2:
-    ARM64: ami-0d7e5fcb5ac1abd79
+    ARM64: ami-0d53c03070323a635
 Resources:
   ec2SingleSecurityGroup:
     Type: AWS::EC2::SecurityGroup
@@ -215,6 +222,18 @@ Resources:
                 Resource:
                   - !Sub ${s3DefaultDestinationBucket.Arn}
                   - !Sub ${s3DefaultDestinationBucket.Arn}/*
+        - PolicyName: SQSSources
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - sqs:ReceiveMessage
+                  - sqs:DeleteMessage
+                  - sqs:GetQueueAttributes
+                  - sqs:GetQueueUrl
+                Resource:
+                  - !Sub arn:${AWS::Partition}:sqs:${AWS::Region}::${AWS::AccountId}::${SQS}
       Tags:
         - Key: Name
           Value: Cribl LogStream IAM role
@@ -227,7 +246,7 @@ Resources:
   ec2WorkersAutoScalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
     Properties:
-      VPCZoneIdentifier:   
+      VPCZoneIdentifier:
        - !Select [0, !Ref 'subnetIds']
        - !Select [1, !Ref 'subnetIds']
       TargetGroupARNs: 
@@ -266,7 +285,7 @@ Resources:
           Fn::Sub:
             - |
                 #cloud-config
-                runcmd: 
+                runcmd:
                   - /usr/local/bin/configure_logstream.sh -m single -b ${s3DefaultDestinationBucket}
                   - sleep 10
                   - cloud-init query -f "$(cat /opt/cribl_build/users.json.j2)" > /opt/cribl/local/cribl/auth/users.json
@@ -278,7 +297,7 @@ Resources:
               - Key: Name
                 Value: Cribl LogStream Worker Instance
               - Key: Purpose
-                Value: Machine data analysis            
+                Value: Machine data analysis 
   workerShutdownEventRule:
     Type: AWS::Events::Rule
     Properties:
@@ -372,7 +391,7 @@ Resources:
               Resource: "*"
       Runtime: python3.7
       Timeout: 600
-      Handler: index.handler  
+      Handler: index.handler
 Outputs:
   logstreamWebUrlPublic:
     Value: !Sub http://${LoadBalancerExternal.DNSName}:9000/login
