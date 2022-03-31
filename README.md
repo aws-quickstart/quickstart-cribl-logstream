@@ -1,6 +1,7 @@
 # Cribl Stream on Amazon - Quick Start
 This Quick Start guide was created by [Cribl](https://cribl.io) to help automate the deployment of [Cribl Stream](https://cribl.io/logstream/) in your AWS environment. These  automated reference deployments use AWS CloudFormation templates to deploy EC2 instances, IAM policies and S3 buckets, following AWS best practices. 
 
+
 ## Deployment
 This Quick Start deployment builds a new AWS environment consisting of the infrastructure resources required to provision Cribl Stream. 
 
