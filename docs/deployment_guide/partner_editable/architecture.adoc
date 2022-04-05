@@ -21,5 +21,11 @@ internet access for resources in the private subnets.*
 
 // Add bullet points for any additional components that are included in the deployment. Ensure that the additional components are also represented in the architecture diagram. End each bullet with a period.
 * An S3 bucket to test sending and receiving data. *
+* An EC2 instance *
+* An SQS *
+* An ALB *
+* An AutoScale Group *
+* An IAM role for the EC2 *
+* An IAM Policy *
 
 [.small]#* The template that deploys the Quick Start into an existing VPC skips the components marked by asterisks and prompts you for your existing VPC configuration.#
