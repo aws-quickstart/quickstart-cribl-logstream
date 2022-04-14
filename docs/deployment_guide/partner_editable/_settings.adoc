@@ -3,7 +3,7 @@
 :partner-product-name: Cribl LogStream
 :partner-product-short-name: LogStream
 :partner-company-name: Cribl
-:doc-month: February
+:doc-month: April
 :doc-year: 2022
 :partner-contributors: Kam Amir, Cribl
 //:other-contributors: Akua Mansa, Trek10
