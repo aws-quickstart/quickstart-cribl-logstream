@@ -4,10 +4,15 @@
  If you want to add more services, please have their ARN's and IAM Policy requirements for them. For example, if you want to add support to read from a Kinesis Stream, an SQS or another S3 bucket, please modify the IAM policy post deployment. Once you have the policy in place, the documentation links will also show you how to setup each service to collect or send data. 
 
 Here are the documentation links for adding AWS sources:
-- Kinesis (Source): https://docs.cribl.io/stream/sources-kinesis-streams/#auto-authentication 
-- SQS (Source) : https://docs.cribl.io/stream/sources-sqs#sqs-permissions
-- S3 (Source) : https://docs.cribl.io/stream/sources-s3#s3-and-sqs-permissions
+
+* Kinesis (Source): https://docs.cribl.io/stream/sources-kinesis-streams/#auto-authentication 
+
+* SQS (Source) : https://docs.cribl.io/stream/sources-sqs#sqs-permissions
+
+* S3 (Source) : https://docs.cribl.io/stream/sources-s3#s3-and-sqs-permissions
 
 Here is the documenationa for adding AWS destinations:
-- SQS : https://docs.cribl.io/stream/destinations-sqs#sqs-permissions 
-- S3 : https://docs.cribl.io/stream/destinations-s3#amazon-s3-permissions 
+
+* SQS : https://docs.cribl.io/stream/destinations-sqs#sqs-permissions 
+
+* S3 : https://docs.cribl.io/stream/destinations-s3#amazon-s3-permissions 
