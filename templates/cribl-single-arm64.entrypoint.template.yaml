@@ -75,7 +75,7 @@ Parameters:
     ConstraintDescription: The Quick Start bucket name can include numbers, lowercase
       letters, uppercase letters, and hyphens (-). It cannot start or end with a 
       hyphen (-).
-    Default: aws-quickstart-cribl-logstream
+    Default: aws-quickstart
     Description: Name of the S3 bucket for your copy of the Quick Start assets. 
       Keep the default name unless you are customizing the template. 
       Changing the name updates code references to point to a new Quick 
@@ -84,30 +84,17 @@ Parameters:
       See https://aws-quickstart.github.io/option1.html.
     Type: String
   QSS3BucketRegion:
-    Default: us-west-2
-    Description: The AWS Region where the Quick Start S3 bucket (QSS3BucketName) is hosted. When using your own bucket, you must specify this value.
+    Default: 'us-west-2'
+    Description: 'AWS Region where the Quick Start S3 bucket (QSS3BucketName) is 
+    hosted. Keep the default Region unless you are customizing the template. 
+    Changing this Region updates code references to point to a new Quick Start location. 
+    When using your own bucket, specify the Region. 
+    See https://aws-quickstart.github.io/option1.html.'
     Type: String
-    AllowedValues:
-      - us-east-1
-      - us-east-2
-      - us-west-1
-      - us-west-2
-      - eu-north-1
-      - ap-south-1
-      - eu-west-3
-      - eu-west-2
-      - eu-west-1
-      - ap-northeast-2
-      - ap-northeast-1
-      - sa-east-1
-      - ca-central-1
-      - ap-southeast-1
-      - ap-southeast-2
-      - eu-central-1
   QSS3KeyPrefix:
     AllowedPattern: ^([0-9a-zA-Z-.]+/)*$
     ConstraintDescription: The Quick Start S3 key prefix can include numbers, lowercase letters,
-     uppercase letters, hyphens (-), and forward slashes (/).
+      uppercase letters, hyphens (-), and forward slashes (/).
     Default: logstream/
     Description: S3 key prefix that is used to simulate a directory for your copy of the 
       Quick Start assets. Keep the default prefix unless you are customizing 
@@ -139,3 +126,7 @@ Resources:
           - ','
           - !Ref subnetIds
         instanceType: !Ref instanceType
+Outputs:
+  Postdeployment:
+    Description: See the deployment guide for postdeployment steps.
+    Value: https://fwd.aws/e6Jk3?
