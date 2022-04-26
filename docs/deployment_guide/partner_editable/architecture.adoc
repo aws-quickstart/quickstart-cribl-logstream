@@ -13,17 +13,10 @@ image::../docs/deployment_guide/images/architecture_diagram.png[Architecture]
 As shown in <<architecture1>>, the Quick Start sets up the following:
 
 * A highly available architecture that spans two Availability Zones.*
-* A VPC configured with public and private subnets, according to AWS
-best practices, to provide you with your own virtual network on AWS.*
-* In the public subnets:
-** Managed network address translation (NAT) gateways to allow outbound
-internet access for resources in the private subnets.*
-
-// Add bullet points for any additional components that are included in the deployment. Ensure that the additional components are also represented in the architecture diagram. End each bullet with a period.
-* An S3 bucket to test sending and receiving data. *
-* An EC2 Instance to run your Cribl Stream software. *
-* An AutoScale group for your EC2 instance. *
-* An ALB to route traffic to the available EC2 instance. *
-* An IAM role and policy for your AWS resources. *
+* A virtual private cloud (VPC) configured with public and private subnets, according to AWS best practices, to provide you with your own virtual network on AWS.*
+* An Application Load Balancer to route traffic to the LogStream instances.
+* In the public subnets, Cribl Logstream deployed to Amazon Elastic Compute Cloud (Amazon EC2) instances in an Auto Scaling group. 
+* An S3 bucket to test sending and receiving LogStream data.
+* AWS Identity and Access Management (IAM) for a role and policy providing the LogStream instances access to the S3 bucket. You can modify the IAM policy after deployment to add supported data sources and destinations.
 
 [.small]#* The template that deploys the Quick Start into an existing VPC skips the components marked by asterisks and prompts you for your existing VPC configuration.#
