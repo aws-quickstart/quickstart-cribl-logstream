@@ -16,3 +16,15 @@ Here is the documenationa for adding AWS destinations:
 * SQS : https://docs.cribl.io/stream/destinations-sqs#sqs-permissions 
 
 * S3 : https://docs.cribl.io/stream/destinations-s3#amazon-s3-permissions 
+
+== Aditional resources
+
+* https://cribl.io/community[Cribl Community]
+* https://cribl.io/resources[Cribl Resources]
+* https://docs.cribl.io/docs/deploy-single-instance[Single Instance Deployments]
+* https://docs.cribl.io/docs/deploy-distributed[Distributed Deployments]
+* https://docs.cribl.io/docs/scaling[Sizing and Scaling]
+* https://docs.cribl.io/logstream/usecase-aws-x-account[AWS Cross-Account Data Collection]
+* https://docs.cribl.io/logstream/sources[Sources]
+* https://docs.cribl.io/logstream/destinations[Destinations]
+* https://cribl.io/integrations/[Integrations]
