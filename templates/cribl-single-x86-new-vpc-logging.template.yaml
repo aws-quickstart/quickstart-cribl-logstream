@@ -44,7 +44,7 @@ Metadata:
       PrivateSubnet1CIDR:
         default: Private subnet 1 CIDR
       PrivateSubnet2CIDR:
-        default: Private subnet 2 CIDR        
+        default: Private subnet 2 CIDR
       VPCTenancy:
         default: VPC tenancy
       VPCCIDR:
@@ -322,11 +322,11 @@ Resources:
     Type: AWS::CloudFormation::Stack
     Properties:
       TemplateURL: !Sub 
-      - https://${S3Bucket}.s3.${QSS3BucketRegion}.${AWS::URLSuffix}/${QSS3KeyPrefix}/cribl-single-x86.workload.template.yaml
-      - S3Bucket: !If
-           - UsingDefaultBucket
-           - !Sub '${QSS3BucketName}-cribl-logstream-${QSS3BucketRegion}'
-           - !Ref QSS3BucketName
+        - https://${S3Bucket}.s3.${QSS3BucketRegion}.${AWS::URLSuffix}/${QSS3KeyPrefix}/cribl-single-x86.workload.template.yaml
+        - S3Bucket: !If
+            - UsingDefaultBucket
+            - !Sub '${QSS3BucketName}-cribl-logstream-${QSS3BucketRegion}'
+            - !Ref QSS3BucketName
       Parameters:
         webAccessCidr: !Ref webAccessCidr
         vpcId: !GetAtt
