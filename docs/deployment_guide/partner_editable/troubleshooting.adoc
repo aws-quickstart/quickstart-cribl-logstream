@@ -17,9 +17,9 @@ For more information, see https://docs.aws.amazon.com/AWSCloudFormation/latest/U
 
 *A.* Launch the Quick Start templates from the links in this guide or from another S3 bucket. If you deploy the templates from a local copy on your computer or from a location other than an S3 bucket, you might encounter template-size limitations. For more information, see http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html[AWS CloudFormation quotas^].
 
-*Q.* Can I deploy this Quick Start in a different AWS Region other than *us-east-1* ?
+*Q.* Can I deploy this Quick Start in a different AWS Region other than the default (us-east-1)?
 
-*A.* You can deploy in any supported Region. To change the Region, select the new region in the CloudFormation drop down in the AWS Console. Then, in the CloudFormation template itself, make sure to specify the Region that you selected.
+*A.* You can enter a different Region during deployment for the `Quick Start S3 bucket Region` parameter. For any Quick Start to work in a Region other than its default Region, all the services it deploys must be supported in that Region. You can launch a Quick Start in any Region and see if it works. If you get an error such as `Unrecognized resource type,` the Quick Start is not supported in that Region. For an up-to-date list of AWS Regions and the AWS services they support, see https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/[AWS Regional Services].
 
 *Q.* Can I modify the EC2 IAM policy to include other S3 buckets, Kinesis streams, or other AWS resources for my instance to access?
 
@@ -28,13 +28,10 @@ For more information, see https://docs.aws.amazon.com/AWSCloudFormation/latest/U
 *Q.* Where can I find the Cribl URL output when I choose a deployment option into a new VPC?
 *A.* When you choose an option to deploy into a new VPC, the Quick Start deploys `VPC` and `CriblDeploy` templates. The Cribl URL can be found in the `CriblDeploy` template. To log in, use the AMI instance ID as the password.
 
-*Q.* After my instance was rebuilt by the Auto Scaling group, I can no longer log into my instance, what's the new password?
-*A.* When your instance gets rebuilt by the AutoScale Group, the password is reset to the new AMI Instance ID.
+*Q.* After my instance was rebuilt by the Auto Scaling group, I can no longer log into my instance. What's the new password?
+*A.* When the Auto Scaling group rebuilds an instance, it resets the administrator password to the new instance's AMI ID.
 
 == Troubleshooting
 
-During deployment, you must select two  Availability Zones or the deployment will fail.
-
-If your leader node is terminated, the Auto Scaling group spins up a new one. In this case, the administrator password changes to the new instance AMI. Use that as the password to log into the Cribl LogStream leader node. 
-
-You can use a git repository to backup your configurations. For more information, refer to https://docs.cribl.io/logstream/gitops/[GitOps on Cribl].
+* During deployment, you must select two Availability Zones or the deployment will fail.
+* You can use a git repository to backup your configurations. For more information, refer to https://docs.cribl.io/logstream/gitops/[GitOps on Cribl].
