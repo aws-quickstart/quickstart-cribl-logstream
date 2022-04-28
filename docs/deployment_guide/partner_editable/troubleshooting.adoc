@@ -17,22 +17,24 @@ For more information, see https://docs.aws.amazon.com/AWSCloudFormation/latest/U
 
 *A.* Launch the Quick Start templates from the links in this guide or from another S3 bucket. If you deploy the templates from a local copy on your computer or from a location other than an S3 bucket, you might encounter template-size limitations. For more information, see http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html[AWS CloudFormation quotas^].
 
-*Q.* Can I deploy this solution in a different region other than *us-west-2* ?
+*Q.* Can I deploy this Quick Start in a different AWS Region other than *us-east-1* ?
 
-*A.* Yes, you can deploy in other regions that are supported in the regions listed in this document. To change the region, make sure to select the new region in the CloudFormation drop down in the AWS Console. Then, in the CloudFormation template itself, make sure to specify the region that you selected.
+*A.* You can deploy in any supported Region. To change the Region, select the new region in the CloudFormation drop down in the AWS Console. Then, in the CloudFormation template itself, make sure to specify the Region that you selected.
 
-*Q.* Can I modify the EC2 IAM Policy to include other S3 buckets, Kinesis Streams or other AWS resources for my instance to access?
+*Q.* Can I modify the EC2 IAM policy to include other S3 buckets, Kinesis streams, or other AWS resources for my instance to access?
 
-*A.* Yes, you can modify the EC2 IAM Policy to include other resources you want the Cribl LogStream instance to access. Please refer to https://docs.cribl.io/logstream/sources-s3#s3-and-sqs-permissions for S3 / SQS permissions and https://docs.cribl.io/logstream/sources-kinesis-streams#authentication for Kinesis permissions.
+*A.* Yes. For more information, refer to https://docs.cribl.io/logstream/sources-s3#s3-and-sqs-permissions[S3 and SQS Permissions] and https://docs.cribl.io/stream/sources-kinesis-streams/[Amazon Kinesis Streams].
 
-*Q.* Where can I see the outputs when I deploy a New VPC or New VPC + Logging Cloudformation template?
-*A.* When you deploy this stack, you will actually deploy a **VPC** and **CriblDeploy** templates, just go to the **CriblDeploy** template to see the URL for your Cribl Login. You will still need to use the AMI Instance ID as the password.
+*Q.* Where can I find the Cribl URL output when I choose a deployment option into a new VPC?
+*A.* When you choose an option to deploy into a new VPC, the Quick Start deploys `VPC` and `CriblDeploy` templates. The Cribl URL can be found in the `CriblDeploy` template. To log in, use the AMI instance ID as the password.
 
-*Q.* My instance was rebuilt by the autoscale group and I can no longer log into my instance, what's the new password?
+*Q.* After my instance was rebuilt by the Auto Scaling group, I can no longer log into my instance, what's the new password?
 *A.* When your instance gets rebuilt by the AutoScale Group, the password is reset to the new AMI Instance ID.
 
 == Troubleshooting
 
-Make sure to select TWO Availability Zones (AZ) for your deployment. Selecting one will cause the template to fail.
+During deployment, you must select two  Availability Zones or the deployment will fail.
 
-If your leader gets terminiated, a new leader node will be spawned by the Autoscale Group. The *admin* password will change and will be the *new* instnace_id of the deployment. Simply use that password to log into your Cribl LogStream Leader Node. Additionally, you can now use a git repo to backup your configurations. GitOps on Cribl https://docs.cribl.io/logstream/gitops/
+If your leader node is terminated, the Auto Scaling group spins up a new one. In this case, the administrator password changes to the new instance AMI. Use that as the password to log into the Cribl LogStream leader node. 
+
+You can use a git repository to backup your configurations. For more information, refer to https://docs.cribl.io/logstream/gitops/[GitOps on Cribl].
