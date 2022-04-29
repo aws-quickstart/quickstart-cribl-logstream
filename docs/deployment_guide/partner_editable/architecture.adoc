@@ -15,7 +15,7 @@ As shown in <<architecture1>>, the Quick Start sets up the following:
 * A highly available architecture that spans two Availability Zones.*
 * A virtual private cloud (VPC) configured with public and private subnets, according to AWS best practices, to provide you with your own virtual network on AWS.*
 * An Application Load Balancer to route traffic to the LogStream instances.
-* In the public subnets, Cribl Logstream deployed to Amazon Elastic Compute Cloud (Amazon EC2) instances in an Auto Scaling group. 
+* In the public subnets, Cribl LogStream deployed to Amazon Elastic Compute Cloud (Amazon EC2) instances in an Auto Scaling group. 
 * An S3 bucket to test sending and receiving LogStream data.
 * AWS Identity and Access Management (IAM) for a role and policy providing the LogStream instances access to the S3 bucket. You can modify the IAM policy after deployment to add supported data sources and destinations.
 

@@ -4,11 +4,11 @@
 
 === Logging into the Cribl
 
-Log into Cribl Stream with the credential supplied in the nested **CriblDeploy** "Outputs" tab on your CloudFormation stack.
+Log in to Cribl Stream with the credential supplied in the nested **CriblDeploy** "Outputs" tab on your CloudFormation stack.
 
 === Adding other data sources and destinations
 
-Edit the IAM policy after deployment to add data sources such as Amazon Kinesis, Amazon Simple Queue Service (Amazon SQS), or Amazon S3. You will need to have the ARN and IAM policy requirements for any services that you to add. After editing the IAM policy, refer to the following links to integrate the added source or destination with Logstream.
+You can add data sources, such as Amazon Kinesis, Amazon Simple Queue Service (Amazon SQS), or Amazon S3, to the IAM policy that is included with the deployment. You must have the ARN and IAM policy requirements for any services that you to add. After editing the IAM policy, refer to the following links to integrate the added source or destination with LogStream.
 
 ==== Data sources
 

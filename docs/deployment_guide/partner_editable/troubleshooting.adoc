@@ -28,7 +28,7 @@ For more information, see https://docs.aws.amazon.com/AWSCloudFormation/latest/U
 *Q.* Where can I find the Cribl URL output when I choose a deployment option into a new VPC?
 *A.* Refer to the `Cribl LogStream Web URL` output of the CloudFormation stack after deployment. To log in, use the LogStream instance AMI ID as the password.
 
-*Q.* After my instance was rebuilt by the Auto Scaling group, I can no longer log into my instance. What's the new password?
+*Q.* After my instance was rebuilt by the Auto Scaling group, I can no longer log in to my instance. What's the new password?
 *A.* When the Auto Scaling group rebuilds an instance, it resets the administrator password to the new instance's AMI ID.
 
 == Troubleshooting
