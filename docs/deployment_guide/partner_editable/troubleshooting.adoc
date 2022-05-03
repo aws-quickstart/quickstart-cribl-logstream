@@ -17,22 +17,21 @@ For more information, see https://docs.aws.amazon.com/AWSCloudFormation/latest/U
 
 *A.* Launch the Quick Start templates from the links in this guide or from another S3 bucket. If you deploy the templates from a local copy on your computer or from a location other than an S3 bucket, you might encounter template-size limitations. For more information, see http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html[AWS CloudFormation quotas^].
 
-*Q.* Can I deploy this solution in a different region other than *us-west-2* ?
+*Q.* Can I deploy this Quick Start in a different AWS Region other than the default (us-east-1)?
 
-*A.* Yes, you can deploy in other regions that are supported in the regions listed in this document. To change the region, make sure to select the new region in the CloudFormation drop down in the AWS Console. Then, in the CloudFormation template itself, make sure to specify the region that you selected.
+*A.* You can enter a different Region during deployment for the `Quick Start S3 bucket Region` parameter. For any Quick Start to work in a Region other than its default Region, all the services it deploys must be supported in that Region. You can launch a Quick Start in any Region and see if it works. If you get an error such as `Unrecognized resource type,` the Quick Start is not supported in that Region. For an up-to-date list of AWS Regions and the AWS services they support, see https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/[AWS Regional Services].
 
-*Q.* Can I modify the EC2 IAM Policy to include other S3 buckets, Kinesis Streams or other AWS resources for my instance to access?
+*Q.* Can I modify the EC2 IAM policy to include other S3 buckets, Kinesis streams, or other AWS resources for my instance to access?
 
-*A.* Yes, you can modify the EC2 IAM Policy to include other resources you want the Cribl LogStream instance to access. Please refer to https://docs.cribl.io/logstream/sources-s3#s3-and-sqs-permissions for S3 / SQS permissions and https://docs.cribl.io/logstream/sources-kinesis-streams#authentication for Kinesis permissions.
+*A.* Yes. For more information, refer to https://docs.cribl.io/logstream/sources-s3#s3-and-sqs-permissions[S3 and SQS Permissions] and https://docs.cribl.io/stream/sources-kinesis-streams/[Amazon Kinesis Streams].
 
-*Q.* Where can I see the outputs when I deploy a New VPC or New VPC + Logging Cloudformation template?
-*A.* When you deploy this stack, you will actually deploy a **VPC** and **CriblDeploy** templates, just go to the **CriblDeploy** template to see the URL for your Cribl Login. You will still need to use the AMI Instance ID as the password.
+*Q.* Where can I find the Cribl URL output when I choose a deployment option into a new VPC?
+*A.* Refer to the `Cribl LogStream Web URL` output of the CloudFormation stack after deployment. To log in, use the LogStream instance AMI ID as the password.
 
-*Q.* My instance was rebuilt by the autoscale group and I can no longer log into my instance, what's the new password?
-*A.* When your instance gets rebuilt by the AutoScale Group, the password is reset to the new AMI Instance ID.
+*Q.* After my instance was rebuilt by the Auto Scaling group, I can no longer log in to my instance. What's the new password?
+*A.* When the Auto Scaling group rebuilds an instance, it resets the administrator password to the new instance's AMI ID.
 
 == Troubleshooting
 
-Make sure to select TWO Availability Zones (AZ) for your deployment. Selecting one will cause the template to fail.
-
-If your leader gets terminiated, a new leader node will be spawned by the Autoscale Group. The *admin* password will change and will be the *new* instnace_id of the deployment. Simply use that password to log into your Cribl LogStream Leader Node. Additionally, you can now use a git repo to backup your configurations. GitOps on Cribl https://docs.cribl.io/logstream/gitops/
+* During deployment, you must select two Availability Zones or the deployment will fail.
+* You can use a git repository to backup your configurations. For more information, refer to https://docs.cribl.io/logstream/gitops/[GitOps on Cribl].
