@@ -1,4 +1,4 @@
-## Cribl Logstream Quick Start
+## Cribl Stream Quick Start
 
 For architectural details, step-by-step instructions, and customization options, see the [deployment guide](https://fwd.aws/e6Jk3?).
 
