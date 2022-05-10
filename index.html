@@ -5,9 +5,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.17">
-<meta name="description" content="Cribl LogStream Deployment Guide on AWS">
-<meta name="keywords" content="Quick Start, AWS, Cribl LogStream">
-<title>Cribl LogStream on the AWS Cloud</title>
+<meta name="description" content="Cribl Stream Deployment Guide on AWS">
+<meta name="keywords" content="Quick Start, AWS, Cribl Stream">
+<title>Cribl Stream on the AWS Cloud</title>
 <style>
 /* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
 /* Uncomment @import statement to use as custom stylesheet */
@@ -857,7 +857,7 @@ p.footer-text a{color:#d7d8d8}
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<h2 id="_cribl_logstream_on_the_aws_cloud" class="discrete text-center">Cribl LogStream on the AWS Cloud</h2>
+<h2 id="_cribl_stream_on_the_aws_cloud" class="discrete text-center">Cribl Stream on the AWS Cloud</h2>
 <h2 id="_quick_start_reference_deployment" class="discrete text-left text-center">Quick Start Reference Deployment</h2>
 <div class="imageblock text-center">
 <div class="content">
@@ -895,7 +895,7 @@ Visit our <a href="https://github.com/aws-quickstart/quickstart-cribl-logstream"
 <h2 id="_overview">Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This Quick Start deploys Cribl LogStream on the AWS Cloud. If you are unfamiliar with AWS Quick Starts, refer to the <a href="https://fwd.aws/rA69w?">AWS Quick Start General Information Guide</a>.</p>
+<p>This Quick Start deploys Cribl Stream on the AWS Cloud. If you are unfamiliar with AWS Quick Starts, refer to the <a href="https://fwd.aws/rA69w?">AWS Quick Start General Information Guide</a>.</p>
 </div>
 </div>
 </div>
@@ -918,14 +918,14 @@ Visit our <a href="https://github.com/aws-quickstart/quickstart-cribl-logstream"
 <div class="sectionbody">
 <div class="paragraph">
 <p>Deploying this Quick Start for a new virtual private cloud (VPC) with
-default parameters builds the following LogStream environment in the
+default parameters builds the following Stream environment in the
 AWS Cloud.</p>
 </div>
 <div id="architecture1" class="imageblock">
 <div class="content">
 <img src="docs/deployment_guide/images/architecture_diagram.png" alt="Architecture">
 </div>
-<div class="title">Figure 1. Quick Start architecture for LogStream on AWS</div>
+<div class="title">Figure 1. Quick Start architecture for Stream on AWS</div>
 </div>
 <div class="paragraph">
 <p>As shown in <a href="#architecture1">Figure 1</a>, the Quick Start sets up the following:</p>
@@ -933,27 +933,24 @@ AWS Cloud.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>A highly available architecture that spans two Availability Zones.*</p>
+<p>A highly available architecture that spans two Availability Zones in your virtual private cloud (VPC).</p>
 </li>
 <li>
-<p>A virtual private cloud (VPC) configured with public and private subnets, according to AWS best practices, to provide you with your own virtual network on AWS.*</p>
+<p>An Application Load Balancer to route traffic to LogStream instances.</p>
 </li>
 <li>
-<p>An Application Load Balancer to route traffic to the LogStream instances.</p>
-</li>
-<li>
-<p>In the public subnets, Cribl LogStream deployed to Amazon Elastic Compute Cloud (Amazon EC2) instances in an Auto Scaling group.</p>
+<p>In the public subnets, Cribl Stream deployed to Amazon Elastic Compute Cloud (Amazon EC2) instances in an Auto Scaling group.*</p>
 </li>
 <li>
 <p>An S3 bucket to test sending and receiving LogStream data.</p>
 </li>
 <li>
-<p>AWS Identity and Access Management (IAM) for a role and policy providing the LogStream instances access to the S3 bucket. You can modify the IAM policy after deployment to add supported data sources and destinations.</p>
+<p>AWS Identity and Access Management (IAM) for a role and policy providing the LogStream instances access to the S3 bucket. You can add other Cribl-supported data sources and destinations by editing the IAM policy after deployment.</p>
+</li>
+<li>
+<p>By default, to give users a better experience when getting started with Cribl LogStream, this Quick Start deploys in a public subnet. If you&#8217;re deploying this Quick Start in a production environment, consider using a private subnet.</p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p><span class="small">* The template that deploys the Quick Start into an existing VPC skips the components marked by asterisks and prompts you for your existing VPC configuration.</span></p>
 </div>
 </div>
 </div>
@@ -966,27 +963,27 @@ AWS Cloud.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://fwd.aws/9xD3e?">Deploy LogStream into a new VPC (ARM64)</a>. This option builds a new AWS environment consisting of the VPC, subnets, NAT gateways, security groups, bastion hosts, and other infrastructure components. It then deploys LogStream into this new VPC.</p>
+<p><a href="https://fwd.aws/9xD3e?">Deploy Stream into a new VPC (ARM64)</a>. This option builds a new AWS environment consisting of the VPC, subnets, NAT gateways, security groups, bastion hosts, and other infrastructure components. It then deploys Stream into this new VPC.</p>
 </li>
 <li>
-<p><a href="https://fwd.aws/AjwK3?">Deploy LogStream into an existing VPC (ARM64)</a>. This option provisions LogStream in your existing AWS infrastructure.</p>
+<p><a href="https://fwd.aws/AjwK3?">Deploy Stream into an existing VPC (ARM64)</a>. This option provisions Stream in your existing AWS infrastructure.</p>
 </li>
 <li>
-<p><a href="https://fwd.aws/z5wkr?">Deploy LogStream into a new VPC (ARM64) with VPC Flow Logs enabled</a>. This option builds a new AWS environment consisting of the VPC, subnets, NAT gateways, security groups, bastion hosts, and other infrastructure components. It then deploys LogStream into this new VPC.</p>
+<p><a href="https://fwd.aws/z5wkr?">Deploy Stream into a new VPC (ARM64) with VPC Flow Logs enabled</a>. This option builds a new AWS environment consisting of the VPC, subnets, NAT gateways, security groups, bastion hosts, and other infrastructure components. It then deploys Stream into this new VPC.</p>
 </li>
 <li>
-<p><a href="https://fwd.aws/PmWdw?">Deploy LogStream into a new VPC (x86)</a>. This option builds a new AWS environment consisting of the VPC, subnets, NAT gateways, security groups, bastion hosts, and other infrastructure components. It then deploys LogStream into this new VPC.</p>
+<p><a href="https://fwd.aws/PmWdw?">Deploy Stream into a new VPC (x86)</a>. This option builds a new AWS environment consisting of the VPC, subnets, NAT gateways, security groups, bastion hosts, and other infrastructure components. It then deploys Stream into this new VPC.</p>
 </li>
 <li>
-<p><a href="https://fwd.aws/g89ea?">Deploy LogStream into an existing VPC (x86)</a>. This option provisions LogStream in your existing AWS infrastructure.</p>
+<p><a href="https://fwd.aws/g89ea?">Deploy Stream into an existing VPC (x86)</a>. This option provisions Stream in your existing AWS infrastructure.</p>
 </li>
 <li>
-<p><a href="https://fwd.aws/87KpJ?">Deploy LogStream into a new VPC (x86) with VPC Flow Logs enabled</a>. This option builds a new AWS environment consisting of the VPC, subnets, NAT gateways, security groups, bastion hosts, and other infrastructure components. It then deploys LogStream into this new VPC.</p>
+<p><a href="https://fwd.aws/87KpJ?">Deploy Stream into a new VPC (x86) with VPC Flow Logs enabled</a>. This option builds a new AWS environment consisting of the VPC, subnets, NAT gateways, security groups, bastion hosts, and other infrastructure components. It then deploys Stream into this new VPC.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The Quick Start provides separate templates for these options. It also lets you configure Classless Inter-Domain Routing (CIDR) blocks, instance types, and LogStream settings.</p>
+<p>The Quick Start provides separate templates for these options. It also lets you configure Classless Inter-Domain Routing (CIDR) blocks, instance types, and Stream settings.</p>
 </div>
 </div>
 </div>
@@ -1020,7 +1017,7 @@ Unless you are customizing the Quick Start templates for your own deployment pro
 <p>Choose <strong>Create stack</strong> to deploy the stack.</p>
 </li>
 <li>
-<p>Monitor the status of the stack. When the status is <strong>CREATE_COMPLETE</strong>, the Cribl LogStream deployment is ready.</p>
+<p>Monitor the status of the stack. When the status is <strong>CREATE_COMPLETE</strong>, the Cribl Stream deployment is ready.</p>
 </li>
 <li>
 <p>To view the created resources, see the values displayed in the <strong>Outputs</strong> tab for the stack.</p>
@@ -1163,7 +1160,7 @@ When you set <strong>Rollback on failure</strong> to <strong>Disabled</strong>, 
 </div>
 <div class="paragraph">
 <p><strong>Q.</strong> Where can I find the Cribl URL output when I choose a deployment option into a new VPC?
-<strong>A.</strong> Refer to the <code>Cribl LogStream Web URL</code> output of the CloudFormation stack after deployment. To log in, use the LogStream instance AMI ID as the password.</p>
+<strong>A.</strong> Refer to the <code>Cribl LogStream Web URL</code> output of the CloudFormation stack after deployment. To log in, use the Stream instance AMI ID as the password.</p>
 </div>
 <div class="paragraph">
 <p><strong>Q.</strong> After my instance was rebuilt by the Auto Scaling group, I can no longer log in to my instance. What&#8217;s the new password?
@@ -1237,7 +1234,7 @@ When you set <strong>Rollback on failure</strong> to <strong>Disabled</strong>, 
 </html>
 <!--
 repo commit:
-cff7708ca9d23e5f02a6d370ec2de2ef8aefa6fa
+4cd7d6de76837ad1d9cfb2ca1e0bf958c83db5c9
 
 submodule config:
  b3fc86c9a2c1f872490acc41828b696863646c57 docs/boilerplate (b3fc86c)

@@ -1,7 +1,7 @@
 :quickstart-project-name: quickstart-cribl-logstream
 :quickstart-github-org: aws-quickstart
-:partner-product-name: Cribl LogStream
-:partner-product-short-name: LogStream
+:partner-product-name: Cribl Stream
+:partner-product-short-name: Stream
 :partner-company-name: Cribl
 :doc-month: May
 :doc-year: 2022
