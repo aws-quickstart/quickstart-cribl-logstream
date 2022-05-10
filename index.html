@@ -936,19 +936,19 @@ AWS Cloud.</p>
 <p>A highly available architecture that spans two Availability Zones in your virtual private cloud (VPC).</p>
 </li>
 <li>
-<p>An Application Load Balancer to route traffic to LogStream instances.</p>
+<p>An Application Load Balancer to route traffic to Cribl Stream instances.</p>
 </li>
 <li>
 <p>In the public subnets, Cribl Stream deployed to Amazon Elastic Compute Cloud (Amazon EC2) instances in an Auto Scaling group.*</p>
 </li>
 <li>
-<p>An S3 bucket to test sending and receiving LogStream data.</p>
+<p>An S3 bucket to test sending and receiving Cribl Stream data.</p>
 </li>
 <li>
-<p>AWS Identity and Access Management (IAM) for a role and policy providing the LogStream instances access to the S3 bucket. You can add other Cribl-supported data sources and destinations by editing the IAM policy after deployment.</p>
+<p>AWS Identity and Access Management (IAM) for a role and policy providing the Cribl Stream instances access to the S3 bucket. You can add other Cribl-supported data sources and destinations by editing the IAM policy after deployment.</p>
 </li>
 <li>
-<p>By default, to give users a better experience when getting started with Cribl LogStream, this Quick Start deploys in a public subnet. If you&#8217;re deploying this Quick Start in a production environment, consider using a private subnet.</p>
+<p>By default, to give users a better experience when getting started with Cribl Stream, this Quick Start deploys in a public subnet. If you&#8217;re deploying this Quick Start in a production environment, consider using a private subnet.</p>
 </li>
 </ul>
 </div>
@@ -1038,7 +1038,7 @@ Unless you are customizing the Quick Start templates for your own deployment pro
 <div class="sect2">
 <h3 id="_adding_other_data_sources_and_destinations">Adding other data sources and destinations</h3>
 <div class="paragraph">
-<p>You can add data sources, such as Amazon Kinesis, Amazon Simple Queue Service (Amazon SQS), or Amazon S3, to the IAM policy that is included with the deployment. You must have the ARN and IAM policy requirements for any services that you to add. After editing the IAM policy, refer to the following links to integrate the added source or destination with LogStream.</p>
+<p>You can add data sources, such as Amazon Kinesis, Amazon Simple Queue Service (Amazon SQS), or Amazon S3, to the IAM policy that is included with the deployment. You must have the ARN and IAM policy requirements for any services that you to add. After editing the IAM policy, refer to the following links to integrate the added source or destination with Stream.</p>
 </div>
 <div class="sect3">
 <h4 id="_data_sources">Data sources</h4>
@@ -1234,7 +1234,7 @@ When you set <strong>Rollback on failure</strong> to <strong>Disabled</strong>, 
 </html>
 <!--
 repo commit:
-4cd7d6de76837ad1d9cfb2ca1e0bf958c83db5c9
+e4461f4da2a9389bfda9838e5fa48256f2da5ce4
 
 submodule config:
  b3fc86c9a2c1f872490acc41828b696863646c57 docs/boilerplate (b3fc86c)

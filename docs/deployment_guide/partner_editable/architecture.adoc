@@ -13,9 +13,9 @@ image::../docs/deployment_guide/images/architecture_diagram.png[Architecture]
 As shown in <<architecture1>>, the Quick Start sets up the following:
 
 * A highly available architecture that spans two Availability Zones in your virtual private cloud (VPC).
-* An Application Load Balancer to route traffic to LogStream instances.
+* An Application Load Balancer to route traffic to Cribl Stream instances.
 * In the public subnets, Cribl Stream deployed to Amazon Elastic Compute Cloud (Amazon EC2) instances in an Auto Scaling group.*
-* An S3 bucket to test sending and receiving LogStream data. 
-* AWS Identity and Access Management (IAM) for a role and policy providing the LogStream instances access to the S3 bucket. You can add other Cribl-supported data sources and destinations by editing the IAM policy after deployment.
+* An S3 bucket to test sending and receiving Cribl Stream data. 
+* AWS Identity and Access Management (IAM) for a role and policy providing the Cribl Stream instances access to the S3 bucket. You can add other Cribl-supported data sources and destinations by editing the IAM policy after deployment.
 
-* By default, to give users a better experience when getting started with Cribl LogStream, this Quick Start deploys in a public subnet. If you're deploying this Quick Start in a production environment, consider using a private subnet.
+* By default, to give users a better experience when getting started with Cribl Stream, this Quick Start deploys in a public subnet. If you're deploying this Quick Start in a production environment, consider using a private subnet.
