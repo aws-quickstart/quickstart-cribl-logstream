@@ -8,7 +8,7 @@ Log in to Cribl Stream with the credential supplied in the nested **CriblDeploy*
 
 === Adding other data sources and destinations
 
-You can add data sources, such as Amazon Kinesis, Amazon Simple Queue Service (Amazon SQS), or Amazon S3, to the IAM policy that is included with the deployment. You must have the ARN and IAM policy requirements for any services that you to add. After editing the IAM policy, refer to the following links to integrate the added source or destination with LogStream.
+You can add data sources, such as Amazon Kinesis, Amazon Simple Queue Service (Amazon SQS), or Amazon S3, to the IAM policy that is included with the deployment. You must have the ARN and IAM policy requirements for any services that you to add. After editing the IAM policy, refer to the following links to integrate the added source or destination with Stream.
 
 ==== Data sources
 
