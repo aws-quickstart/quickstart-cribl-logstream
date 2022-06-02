@@ -848,7 +848,6 @@ p.footer-text a{color:#d7d8d8}
 <li><a href="#_aditional_resources">Aditional resources</a></li>
 <li><a href="#_troubleshooting">Troubleshooting</a></li>
 <li><a href="#_faq">FAQ</a></li>
-<li><a href="#_troubleshooting_2">Troubleshooting</a></li>
 <li><a href="#_feedback_on_this_guide">Feedback on this guide</a></li>
 <li><a href="#_notices">Notices</a></li>
 </ul>
@@ -1111,6 +1110,16 @@ Unless you are customizing the Quick Start templates for your own deployment pro
 <div class="sect1">
 <h2 id="_troubleshooting">Troubleshooting</h2>
 <div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>During deployment, you must select two Availability Zones or the deployment will fail.</p>
+</li>
+<li>
+<p>You can use a git repository to backup your configurations. For more information, refer to <a href="https://docs.cribl.io/logstream/gitops/">GitOps on Cribl</a>.</p>
+</li>
+</ul>
+</div>
 <div class="paragraph">
 <p>For troubleshooting common Quick Start issues visit the <a href="http://general-content-file">AWS Quick Start General Content Guide</a> or the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html">Troubleshooting CloudFormation</a> page in the AWS documentation.</p>
 </div>
@@ -1166,21 +1175,6 @@ When you set <strong>Rollback on failure</strong> to <strong>Disabled</strong>, 
 <p><strong>Q.</strong> After my instance was rebuilt by the Auto Scaling group, I can no longer log in to my instance. What&#8217;s the new password?
 <strong>A.</strong> When the Auto Scaling group rebuilds an instance, it resets the administrator password to the new instance&#8217;s AMI ID.</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_troubleshooting_2">Troubleshooting</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>During deployment, you must select two Availability Zones or the deployment will fail.</p>
-</li>
-<li>
-<p>You can use a git repository to backup your configurations. For more information, refer to <a href="https://docs.cribl.io/logstream/gitops/">GitOps on Cribl</a>.</p>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p>After you successfully deploy a Quick Start, confirm that your resources and services are updated and configured — including any required patches — to meet your security and other needs. For more information, see the <a href="https://aws.amazon.com/compliance/shared-responsibility-model/">AWS Shared Responsibility Model</a>.</p>
 </div>
@@ -1234,7 +1228,7 @@ When you set <strong>Rollback on failure</strong> to <strong>Disabled</strong>, 
 </html>
 <!--
 repo commit:
-17698bbcd29052a1f319d7873c6a7188254a6145
+0f7eb0f2bf204b043b70a086b7a328bcc48d9907
 
 submodule config:
  b3fc86c9a2c1f872490acc41828b696863646c57 docs/boilerplate (b3fc86c)
