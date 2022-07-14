@@ -322,7 +322,7 @@ Resources:
     Type: AWS::CloudFormation::Stack
     Properties:
       TemplateURL: !Sub 
-        - https://${S3Bucket}.s3.${QSS3BucketRegion}.${AWS::URLSuffix}/${QSS3KeyPrefix}/cribl-single-arm64.workload.template.yaml
+        - https://${S3Bucket}.s3.${QSS3BucketRegion}.${AWS::URLSuffix}/${S3Bucket}-cribl-logstream/templates/cribl-single-arm64.workload.template.yaml
         - S3Bucket: !If
             - UsingDefaultBucket
             - !Sub '${QSS3BucketName}-cribl-logstream-${QSS3BucketRegion}'
