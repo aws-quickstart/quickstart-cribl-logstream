@@ -4,9 +4,7 @@ project:
   package_lambda: false
   parameters: 
       webAccessCidr: 0.0.0.0/0
-      QSS3KeyPrefix: logstream/
-      QSS3BucketRegion: $[taskcat_current_region]
-      QSS3BucketName: aws-quickstart
+      QSS3BucketRegion: us-east-1
 tests:
   cribl-deploy-new-vpc-arm:
     parameters: 
@@ -17,7 +15,7 @@ tests:
       PrivateSubnet1CIDR: 10.0.0.0/19
       PrivateSubnet2CIDR: 10.0.32.0/19
       VPCTenancy: default
-      QSS3BucketRegion: $[taskcat_current_region]
+      QSS3BucketRegion: us-east-1
     template: templates/cribl-single-arm64-new-vpc.template.yaml
     regions:
       - us-west-1
@@ -30,7 +28,7 @@ tests:
       PrivateSubnet1CIDR: 10.0.0.0/19
       PrivateSubnet2CIDR: 10.0.32.0/19
       VPCTenancy: default
-      QSS3BucketRegion: $[taskcat_current_region]
+      QSS3BucketRegion: us-east-1
       LogFilePrefix: cribl-vpc-logs
       TrafficType: ALL
       SQS: cribl-sqs-vpc-logs-arm
@@ -46,7 +44,7 @@ tests:
       PrivateSubnet1CIDR: 10.0.0.0/19
       PrivateSubnet2CIDR: 10.0.32.0/19
       VPCTenancy: default
-      QSS3BucketRegion: $[taskcat_current_region]
+      QSS3BucketRegion: us-east-1
     template: templates/cribl-single-x86-new-vpc.template.yaml
     regions:
       - us-east-1
@@ -59,7 +57,7 @@ tests:
       PrivateSubnet1CIDR: 10.0.0.0/19
       PrivateSubnet2CIDR: 10.0.32.0/19
       VPCTenancy: default
-      QSS3BucketRegion: $[taskcat_current_region]
+      QSS3BucketRegion: us-east-1
       LogFilePrefix: cribl-vpc-logs
       TrafficType: ALL
       SQS: cribl-sqs-vpc-logs-x86

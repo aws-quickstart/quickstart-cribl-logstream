@@ -79,40 +79,43 @@ Rules:
             - VpcId
           - !RefAll "AWS::EC2::VPC::Id"
         AssertDescription: All subnets must in the VPC
+
+# AMIs are for Cribl Stream 3.5.0
 Mappings:
- RegionMap:
-  ap-northeast-1:
-    ARM64: ami-089cf28c01e447dc4
-  ap-northeast-2:
-    ARM64: ami-00a8c391e875d3e8f
-  ap-south-1:
-    ARM64: ami-05bad86d8e45f2b53
-  ap-southeast-1:
-    ARM64: ami-065d44eb4d87d184d
-  ap-southeast-2:
-    ARM64: ami-0a462f896ca85bdc8
-  ca-central-1:
-    ARM64: ami-00eacd1ef07a710dd
-  eu-central-1:
-    ARM64: ami-0f9bbec03eb9c05a5
-  eu-north-1:
-    ARM64: ami-0f9f16d9d8e6137dd
-  eu-west-1:
-    ARM64: ami-00b0e17230e5c1432
-  eu-west-2:
-    ARM64: ami-0dc935426f5b5974c
-  eu-west-3:
-    ARM64: ami-00158cea70cbcdb9f
-  sa-east-1:
-    ARM64: ami-03b8bd38071662914
-  us-east-1:
-    ARM64: ami-0c1edd67b0134d9b8
-  us-east-2:
-    ARM64: ami-06b34bffc9d4cdf53
-  us-west-1:
-    ARM64: ami-0de7551e1ec1c7698
-  us-west-2:
-    ARM64: ami-0d53c03070323a635
+  RegionMap:
+    eu-north-1:
+      ami: ami-00910ef209ffc4c4e
+    ap-south-1:
+      ami: ami-09f9b0775f55517bd
+    eu-west-3:
+      ami: ami-0d741ed09923c8a92
+    eu-west-2:
+      ami: ami-08800f4bbaf7b3370
+    eu-west-1:
+      ami: ami-00b08fb58d01ce9c5
+    ap-northeast-2:
+      ami: ami-05beacfa86d46f561
+    ap-northeast-1:
+      ami: ami-0b5c57befdf7509f9
+    sa-east-1:
+      ami: ami-001f9f03dcd031f60
+    ca-central-1:
+      ami: ami-010955d6dd7f81876
+    ap-southeast-1:
+      ami: ami-0614dcefc723321ea
+    ap-southeast-2:
+      ami: ami-050f45ef9962d223d
+    eu-central-1:
+      ami: ami-00e57e691d9f2ef9c
+    us-east-1:
+      ami: ami-0cd11690b01a81a0e
+    us-east-2:
+      ami: ami-0dd8f20a81d64b0b6
+    us-west-1:
+      ami: ami-002fc54d2a088da4f
+    us-west-2:
+      ami: ami-0d638289439d0574e
+
 Resources:
   ec2SingleSecurityGroup:
     Type: AWS::EC2::SecurityGroup
@@ -275,7 +278,7 @@ Resources:
     Properties:
       LaunchTemplateData:
         InstanceInitiatedShutdownBehavior: terminate
-        ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", ARM64]     
+        ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", arm64]     
         InstanceType: !Ref instanceType
         IamInstanceProfile:
           Arn: !GetAtt iamDefaultInstanceProfile.Arn
