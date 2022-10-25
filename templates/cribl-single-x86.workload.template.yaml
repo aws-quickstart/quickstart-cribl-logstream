@@ -83,37 +83,37 @@ Rules:
 Mappings:
   RegionMap:
     eu-north-1:
-      ami: ami-00ec9a7c0292a7878
+      ami: "ami-00ec9a7c0292a7878"
     ap-south-1:
-      ami: ami-0a021c38980094093
+      ami: "ami-0a021c38980094093"
     eu-west-3:
-      ami: ami-011f4b93c1f5a3166
+      ami: "ami-011f4b93c1f5a3166"
     eu-west-2:
-      ami: ami-02c320f1e455e8094
+      ami: "ami-02c320f1e455e8094"
     eu-west-1:
-      ami: ami-04a2a879947f15a20
+      ami: "ami-04a2a879947f15a20"
     ap-northeast-2:
-      ami: ami-092e21aafbcb8e891
+      ami: "ami-092e21aafbcb8e891"
     ap-northeast-1:
-      ami: ami-07be9961422b88a82
+      ami: "ami-07be9961422b88a82"
     sa-east-1:
-      ami: ami-067c554a3be03c7f5
+      ami: "ami-067c554a3be03c7f5"
     ca-central-1:
-      ami: ami-0175cd42cef8968d5
+      ami: "ami-0175cd42cef8968d5"
     ap-southeast-1:
-      ami: ami-08c7b111e9e794c35
+      ami: "ami-08c7b111e9e794c35"
     ap-southeast-2:
-      ami: ami-0ddf6856eadf989db
+      ami: "ami-0ddf6856eadf989db"
     eu-central-1:
-      ami: ami-0b91b1171c4ddc2f2
+      ami: "ami-0b91b1171c4ddc2f2"
     us-east-1:
-      ami: ami-01a90c8bc44001260
+      ami: "ami-01a90c8bc44001260"
     us-east-2:
-      ami: ami-0b479991d83c7df6f
+     ami: "ami-0b479991d83c7df6f"
     us-west-1:
-      ami: ami-0869abfe3bb96a5c0
+      ami: "ami-0869abfe3bb96a5c0"
     us-west-2:
-      ami: ami-0ef84009cf6cf88dd
+      ami: "ami-0ef84009cf6cf88dd"
 
 Resources:
   ec2SingleSecurityGroup:
@@ -277,7 +277,7 @@ Resources:
     Properties:
       LaunchTemplateData:
         InstanceInitiatedShutdownBehavior: terminate
-        ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", HVM64]     
+        ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", ami]     
         InstanceType: !Ref instanceType
         IamInstanceProfile:
           Arn: !GetAtt iamDefaultInstanceProfile.Arn
