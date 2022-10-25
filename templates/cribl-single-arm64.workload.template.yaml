@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Transform: "AWS::Serverless-2016-10-31"
-Description: Cribl LogStream Free Deployment arm64 (qs-1skh1tk5t)
+Description: Cribl LogStream Free Deployment ARM64 (qs-1skh1tk5t)
 Parameters:
   vpcId:
     Description: "REQUIRED: ID of your existing VPC."
@@ -20,24 +20,16 @@ Parameters:
   instanceType:
     Description: EC2 instance type to provision the LogStream instance. If none specified, c6g.2xlarge will be used.
     Type: String
-    Default: c6g.2xlarge
+    Default: c6g.xlarge
     AllowedValues:
       - c6g.large
       - c6g.xlarge
-      - c6g.2xlarge
-      - c6g.4xlarge
       - c6gd.large
       - c6gd.xlarge
-      - c6gd.2xlarge
-      - c6gd.4xlarge
       - m6g.large
       - m6g.xlarge
-      - m6g.2xlarge
-      - m6g.4xlarge
       - m6gd.large
       - m6gd.xlarge
-      - m6gd.2xlarge
-      - m6gd.4xlarge
     ConstraintDescription: Must contain valid instance type
 Metadata:
   cfn-lint:
@@ -80,39 +72,39 @@ Rules:
           - !RefAll "AWS::EC2::VPC::Id"
         AssertDescription: All subnets must in the VPC
 Mappings:
- RegionMap:
-  ap-northeast-1:
-    ARM64: ami-089cf28c01e447dc4
-  ap-northeast-2:
-    ARM64: ami-00a8c391e875d3e8f
-  ap-south-1:
-    ARM64: ami-05bad86d8e45f2b53
-  ap-southeast-1:
-    ARM64: ami-065d44eb4d87d184d
-  ap-southeast-2:
-    ARM64: ami-0a462f896ca85bdc8
-  ca-central-1:
-    ARM64: ami-00eacd1ef07a710dd
-  eu-central-1:
-    ARM64: ami-0f9bbec03eb9c05a5
-  eu-north-1:
-    ARM64: ami-0f9f16d9d8e6137dd
-  eu-west-1:
-    ARM64: ami-00b0e17230e5c1432
-  eu-west-2:
-    ARM64: ami-0dc935426f5b5974c
-  eu-west-3:
-    ARM64: ami-00158cea70cbcdb9f
-  sa-east-1:
-    ARM64: ami-03b8bd38071662914
-  us-east-1:
-    ARM64: ami-0c1edd67b0134d9b8
-  us-east-2:
-    ARM64: ami-06b34bffc9d4cdf53
-  us-west-1:
-    ARM64: ami-0de7551e1ec1c7698
-  us-west-2:
-    ARM64: ami-0d53c03070323a635
+  RegionMap:
+    eu-north-1:
+      ARM64: ami-024f442825535976f
+    ap-south-1:
+      ARM64: ami-08c37554a74085233
+    eu-west-3:
+      ARM64: ami-00b4befb784285e18
+    eu-west-2:
+      ARM64: ami-03af1bbaa5159b909
+    eu-west-1:
+      ARM64: ami-0fc642da59aaa3054
+    ap-northeast-2:
+      ARM64: ami-0d0cbd4bb503a8392
+    ap-northeast-1:
+      ARM64: ami-05713725331d7da87
+    sa-east-1:
+      ARM64: ami-06f2bd6f4bc75e1e4
+    ca-central-1:
+      ARM64: ami-049e89b91860c0c76
+    ap-southeast-1:
+      ARM64: ami-0001ccc0fa2f4bb58
+    ap-southeast-2:
+      ARM64: ami-030a28fd0f4425aa0
+    eu-central-1:
+      ARM64: ami-0a54bb2bd5e987705
+    us-east-1:
+      ARM64: ami-0d674664089a2cc30
+    us-east-2:
+      ARM64: ami-0e691c58d8cbfddfd
+    us-west-1:
+      ARM64: ami-0d277970fb2218635
+    us-west-2:
+      ARM64: ami-0be98fa4b8a367d2b
 Resources:
   ec2SingleSecurityGroup:
     Type: AWS::EC2::SecurityGroup
