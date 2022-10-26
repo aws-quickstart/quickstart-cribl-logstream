@@ -63,24 +63,16 @@ Parameters:
   instanceType:
     Description: EC2 instance type to provision the LogStream instance. If none specified, c6g.2xlarge is used.
     Type: String
-    Default: c6g.2xlarge
+    Default: c6g.xlarge
     AllowedValues:
       - c6g.large
       - c6g.xlarge
-      - c6g.2xlarge
-      - c6g.4xlarge
       - c6gd.large
       - c6gd.xlarge
-      - c6gd.2xlarge
-      - c6gd.4xlarge
       - m6g.large
       - m6g.xlarge
-      - m6g.2xlarge
-      - m6g.4xlarge
       - m6gd.large
       - m6gd.xlarge
-      - m6gd.2xlarge
-      - m6gd.4xlarge
     ConstraintDescription: Must contain valid instance type
   PrivateSubnet1CIDR:
     AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(1[6-9]|2[0-8]))$
@@ -150,12 +142,12 @@ Parameters:
   webAccessCidr:
     AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/([0-9]|[1-2][0-9]|3[0-2]))$
     ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/x.
-    Description:  (Required)The CIDR IP range permitted to access the LogStream web console. We recommend you set this value to a trusted IP range.
+    Description:  "REQUIRED: The CIDR IP range permitted to access the LogStream web console. We recommend you set this value to a trusted IP range."
     Type: String
     Default: 0.0.0.0/0
   VPCCIDR:
     AllowedPattern: ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(1[6-9]|2[0-8]))$
-    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16-28.
+    ConstraintDescription: CIDR block parameter must be in the form x.x.x.x/16-28
     Default: 10.0.0.0/16
     Description: CIDR Block for the VPC.
     Type: String
@@ -319,6 +311,7 @@ Resources:
       TrafficType: !Ref TrafficType 
 
   EmptyBucketLambda:
+    Condition: InternalBucket
     Type: 'AWS::CloudFormation::Stack'
     Properties:
       TemplateURL: !Sub
@@ -332,8 +325,8 @@ Resources:
             - !Ref 'AWS::Region'
             - !Ref 'QSS3BucketRegion'
       Parameters:
-        BucketArn2Empty: !GetAtt FlowLogInternalBucket.Arn
-        Bucket2Empty: !Ref FlowLogInternalBucket
+        BucketArn2Empty: !GetAtt LogBucket.Arn
+        Bucket2Empty: !Ref LogBucket
 
   CriblDeploy:
     Type: AWS::CloudFormation::Stack

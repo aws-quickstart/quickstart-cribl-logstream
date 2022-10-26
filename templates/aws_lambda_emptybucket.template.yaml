@@ -18,29 +18,6 @@ Resources:
       ManagedPolicyArns:
         - !Sub arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
       Policies:
-        - PolicyName: lambda-copier
-          PolicyDocument:
-            Version: '2012-10-17'
-            Statement:
-              - Effect: Allow
-                Action: 
-                  - s3:GetObject
-                  - s3:PutObject
-                  - s3:DeleteObject
-                Resource: '*'
-
-  LambdaRole:
-    Type: AWS::IAM::Role
-    Properties:
-      AssumeRolePolicyDocument:
-        Version: 2012-10-17
-        Statement:
-          - Effect: Allow
-            Action: sts:AssumeRole
-            Principal:
-              Service:
-                - lambda.amazonaws.com
-      Policies:
         - PolicyName: DeleteS3Contents
           PolicyDocument:
             Version: 2012-10-17
@@ -57,8 +34,6 @@ Resources:
                   - 's3:ListBucket'
                 Resource:
                   - !Ref BucketArn2Empty
-      ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
 
   RandomStringFunction:
       Type: AWS::Lambda::Function
@@ -140,7 +115,7 @@ Resources:
       MemorySize: 128
       PackageType: Zip
       Runtime: python3.7
-      Role: !GetAtt LambdaRole.Arn
+      Role: !GetAtt LambdaExecute.Arn
 
   cleanupBucketOnDelete:
     Type: Custom::cleanupbucket

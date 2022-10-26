@@ -51,24 +51,16 @@ Parameters:
   instanceType:
     Description: EC2 instance type to provision the LogStream instance. If none specified, c5.2xlarge is used.
     Type: String
-    Default: c5.2xlarge
+    Default: c5.xlarge
     AllowedValues:
       - c5.large
       - c5.xlarge
-      - c5.2xlarge
-      - c5.4xlarge
       - c5d.large
       - c5d.xlarge
-      - c5d.2xlarge
-      - c5d.4xlarge
       - c5a.large
       - c5a.xlarge
-      - c5a.2xlarge
-      - c5a.4xlarge
       - c5ad.large
       - c5ad.xlarge
-      - c5ad.2xlarge
-      - c5ad.4xlarge
     ConstraintDescription: Must contain valid instance type
   QSS3BucketName:
     AllowedPattern: ^[0-9a-zA-Z]+([0-9a-zA-Z-]*[0-9a-zA-Z])*$
@@ -113,7 +105,7 @@ Resources:
     Type: AWS::CloudFormation::Stack
     Properties:
       TemplateURL: !Sub 
-      - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}templates/cribl-single-x86.workload.template.yaml
+        - https://${S3Bucket}.s3.${S3Region}.${AWS::URLSuffix}/${QSS3KeyPrefix}templates/cribl-single-x86.workload.template.yaml
         - S3Bucket: !If
             - UsingDefaultBucket
             - !Sub '${QSS3BucketName}-${AWS::Region}'

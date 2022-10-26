@@ -31,7 +31,7 @@ tests:
       LogFilePrefix: cribl-vpc-logs
       TrafficType: ALL
       SQS: cribl-sqs-vpc-logs-arm
-    template: templates/cribl-single-arm64-new-vpc.template.yaml
+    template: templates/cribl-single-arm64-new-vpc-logging.template.yaml
     regions:
       - us-west-2
   cribl-deploy-new-vpc-x86:
@@ -58,6 +58,6 @@ tests:
       LogFilePrefix: cribl-vpc-logs
       TrafficType: ALL
       SQS: cribl-sqs-vpc-logs-x86
-    template: templates/cribl-single-x86-new-vpc.template.yaml
+    template: templates/cribl-single-x86-new-vpc-logging.template.yaml
     regions:
       - us-east-2
