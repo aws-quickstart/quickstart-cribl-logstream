@@ -1,3 +1,6 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Lambda template to delete the contents of any bucket provided (qs-1ti2q47qb)
+
 Parameters:
   Bucket2Empty:
     Type: String
@@ -24,7 +27,8 @@ Resources:
             Statement:
               - Effect: Allow
                 Action:
-                  - 's3:*'
+                  - 's3:DeleteObject'
+                  - 's3:GetObject'
                 Resource: !Join
                   - ''
                   - - !Ref BucketArn2Empty
