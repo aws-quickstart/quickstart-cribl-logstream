@@ -20,22 +20,14 @@ Parameters:
   instanceType:
     Description: EC2 instance type to provision the LogStream instance. If none specified, c5.2xlarge will be used.
     Type: String
-    Default: c5.2xlarge
+    Default: c5.xlarge
     AllowedValues:
-      - c5.4xlarge
-      - c5.2xlarge
       - c5.xlarge
       - c5.large
-      - c5d.4xlarge
-      - c5d.2xlarge
       - c5d.xlarge
       - c5d.large
-      - c5a.4xlarge
-      - c5a.2xlarge
       - c5a.xlarge
       - c5a.large
-      - c5ad.4xlarge
-      - c5ad.2xlarge
       - c5ad.xlarge
       - c5ad.large
     ConstraintDescription: Must contain valid instance type  
@@ -79,40 +71,43 @@ Rules:
             - VpcId
           - !RefAll "AWS::EC2::VPC::Id"
         AssertDescription: All subnets must in the VPC
+
+# AMIs are for Cribl Stream 3.5.2 - x86_64
 Mappings:
- RegionMap:
-  ap-northeast-1:
-    HVM64: ami-02af95ed8964c01de
-  ap-northeast-2:
-    HVM64: ami-0569cc6c35ba6a1bb
-  ap-south-1:
-    HVM64: ami-0d7eb42161bbf99ef
-  ap-southeast-1:
-    HVM64: ami-0a9d1dbd5ba013d6f
-  ap-southeast-2:
-    HVM64: ami-06364aed7e1c30fe2
-  ca-central-1:
-    HVM64: ami-015aeef649f1cd8f1
-  eu-central-1:
-    HVM64: ami-08f707bd5cc7f8c89
-  eu-north-1:
-    HVM64: ami-0a01eecbefc3df1fc
-  eu-west-1:
-    HVM64: ami-0723e155ba8035e93
-  eu-west-2:
-    HVM64: ami-0d23997508dbbcc55
-  eu-west-3:
-    HVM64: ami-0b79b84598540961e
-  sa-east-1:
-    HVM64: ami-0b88432ec73cbab5f
-  us-east-1:
-    HVM64: ami-02c377fc15bb1e10d
-  us-east-2:
-    HVM64: ami-0e01b4108a56f357e
-  us-west-1:
-    HVM64: ami-08df32a039bc3ed41
-  us-west-2:
-    HVM64: ami-0d598820918e6e969
+  RegionMap:
+    eu-north-1:
+      ami: ami-0fddc3a120b42abde
+    ap-south-1:
+      ami: ami-01fb369f309b04964
+    eu-west-3:
+      ami: ami-0071c8c8ecdfefb15
+    eu-west-2:
+      ami: ami-033ff967626475475
+    eu-west-1:
+      ami: ami-0b08b4da6556eff4b
+    ap-northeast-2:
+      ami: ami-093d94eeadadfa752
+    ap-northeast-1:
+      ami: ami-01f96a48dafa133a0
+    sa-east-1:
+      ami: ami-0b0f08c465a75877b
+    ca-central-1:
+      ami: ami-0f7018c93e26a01a6
+    ap-southeast-1:
+      ami: ami-0f9698333c541fa14
+    ap-southeast-2:
+      ami: ami-03546c3b32d765565
+    eu-central-1:
+      ami: ami-07406ad5e89a6b6f2
+    us-east-1:
+      ami: ami-07c1a630ffed73dc6
+    us-east-2:
+      ami: ami-05c9d3923a591d295
+    us-west-1:
+      ami: ami-0f859d60acbc06076
+    us-west-2:
+      ami: ami-0bffe570320ddb944
+
 Resources:
   ec2SingleSecurityGroup:
     Type: AWS::EC2::SecurityGroup
@@ -275,7 +270,7 @@ Resources:
     Properties:
       LaunchTemplateData:
         InstanceInitiatedShutdownBehavior: terminate
-        ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", HVM64]     
+        ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", ami]     
         InstanceType: !Ref instanceType
         IamInstanceProfile:
           Arn: !GetAtt iamDefaultInstanceProfile.Arn
