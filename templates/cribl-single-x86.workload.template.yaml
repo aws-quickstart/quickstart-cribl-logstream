@@ -20,22 +20,14 @@ Parameters:
   instanceType:
     Description: EC2 instance type to provision the LogStream instance. If none specified, c5.2xlarge will be used.
     Type: String
-    Default: c5.2xlarge
+    Default: c5.xlarge
     AllowedValues:
-      - c5.4xlarge
-      - c5.2xlarge
       - c5.xlarge
       - c5.large
-      - c5d.4xlarge
-      - c5d.2xlarge
       - c5d.xlarge
       - c5d.large
-      - c5a.4xlarge
-      - c5a.2xlarge
       - c5a.xlarge
       - c5a.large
-      - c5ad.4xlarge
-      - c5ad.2xlarge
       - c5ad.xlarge
       - c5ad.large
     ConstraintDescription: Must contain valid instance type  
@@ -80,40 +72,41 @@ Rules:
           - !RefAll "AWS::EC2::VPC::Id"
         AssertDescription: All subnets must in the VPC
 
+# AMIs are for Cribl Stream 3.5.2 - x86_64
 Mappings:
   RegionMap:
     eu-north-1:
-      ami: "ami-00ec9a7c0292a7878"
+      ami: ami-0fddc3a120b42abde
     ap-south-1:
-      ami: "ami-0a021c38980094093"
+      ami: ami-01fb369f309b04964
     eu-west-3:
-      ami: "ami-011f4b93c1f5a3166"
+      ami: ami-0071c8c8ecdfefb15
     eu-west-2:
-      ami: "ami-02c320f1e455e8094"
+      ami: ami-033ff967626475475
     eu-west-1:
-      ami: "ami-04a2a879947f15a20"
+      ami: ami-0b08b4da6556eff4b
     ap-northeast-2:
-      ami: "ami-092e21aafbcb8e891"
+      ami: ami-093d94eeadadfa752
     ap-northeast-1:
-      ami: "ami-07be9961422b88a82"
+      ami: ami-01f96a48dafa133a0
     sa-east-1:
-      ami: "ami-067c554a3be03c7f5"
+      ami: ami-0b0f08c465a75877b
     ca-central-1:
-      ami: "ami-0175cd42cef8968d5"
+      ami: ami-0f7018c93e26a01a6
     ap-southeast-1:
-      ami: "ami-08c7b111e9e794c35"
+      ami: ami-0f9698333c541fa14
     ap-southeast-2:
-      ami: "ami-0ddf6856eadf989db"
+      ami: ami-03546c3b32d765565
     eu-central-1:
-      ami: "ami-0b91b1171c4ddc2f2"
+      ami: ami-07406ad5e89a6b6f2
     us-east-1:
-      ami: "ami-01a90c8bc44001260"
+      ami: ami-07c1a630ffed73dc6
     us-east-2:
-     ami: "ami-0b479991d83c7df6f"
+      ami: ami-05c9d3923a591d295
     us-west-1:
-      ami: "ami-0869abfe3bb96a5c0"
+      ami: ami-0f859d60acbc06076
     us-west-2:
-      ami: "ami-0ef84009cf6cf88dd"
+      ami: ami-0bffe570320ddb944
 
 Resources:
   ec2SingleSecurityGroup:

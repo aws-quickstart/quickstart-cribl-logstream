@@ -20,24 +20,16 @@ Parameters:
   instanceType:
     Description: EC2 instance type to provision the LogStream instance. If none specified, c6g.2xlarge will be used.
     Type: String
-    Default: c6g.2xlarge
+    Default: c6g.xlarge
     AllowedValues:
       - c6g.large
       - c6g.xlarge
-      - c6g.2xlarge
-      - c6g.4xlarge
       - c6gd.large
       - c6gd.xlarge
-      - c6gd.2xlarge
-      - c6gd.4xlarge
       - m6g.large
       - m6g.xlarge
-      - m6g.2xlarge
-      - m6g.4xlarge
       - m6gd.large
       - m6gd.xlarge
-      - m6gd.2xlarge
-      - m6gd.4xlarge
     ConstraintDescription: Must contain valid instance type
 Metadata:
   cfn-lint:
@@ -80,41 +72,41 @@ Rules:
           - !RefAll "AWS::EC2::VPC::Id"
         AssertDescription: All subnets must in the VPC
 
-# AMIs are for Cribl Stream 3.5.0
+# AMIs are for Cribl Stream 3.5.2 - ARM64
 Mappings:
- RegionMap:
-  eu-north-1:
-    ami: ami-00910ef209ffc4c4e
-  ap-south-1:
-    ami: ami-09f9b0775f55517bd
-  eu-west-3:
-    ami: ami-0d741ed09923c8a92
-  eu-west-2:
-    ami: ami-08800f4bbaf7b3370
-  eu-west-1:
-    ami: ami-00b08fb58d01ce9c5
-  ap-northeast-2:
-    ami: ami-05beacfa86d46f561
-  ap-northeast-1:
-    ami: ami-0b5c57befdf7509f9
-  sa-east-1:
-    ami: ami-001f9f03dcd031f60
-  ca-central-1:
-    ami: ami-010955d6dd7f81876
-  ap-southeast-1:
-    ami: ami-0614dcefc723321ea
-  ap-southeast-2:
-    ami: ami-050f45ef9962d223d
-  eu-central-1:
-    ami: ami-00e57e691d9f2ef9c
-  us-east-1:
-    ami: ami-0cd11690b01a81a0e
-  us-east-2:
-    ami: ami-0dd8f20a81d64b0b6
-  us-west-1:
-    ami: ami-002fc54d2a088da4f
-  us-west-2:
-    ami: ami-0d638289439d0574e
+  RegionMap:
+    eu-north-1:
+      ami: ami-024f442825535976f
+    ap-south-1:
+      ami: ami-08c37554a74085233
+    eu-west-3:
+      ami: ami-00b4befb784285e18
+    eu-west-2:
+      ami: ami-03af1bbaa5159b909
+    eu-west-1:
+      ami: ami-0fc642da59aaa3054
+    ap-northeast-2:
+      ami: ami-0d0cbd4bb503a8392
+    ap-northeast-1:
+      ami: ami-05713725331d7da87
+    sa-east-1:
+      ami: ami-06f2bd6f4bc75e1e4
+    ca-central-1:
+      ami: ami-049e89b91860c0c76
+    ap-southeast-1:
+      ami: ami-0001ccc0fa2f4bb58
+    ap-southeast-2:
+      ami: ami-030a28fd0f4425aa0
+    eu-central-1:
+      ami: ami-0a54bb2bd5e987705
+    us-east-1:
+      ami: ami-0d674664089a2cc30
+    us-east-2:
+      ami: ami-0e691c58d8cbfddfd
+    us-west-1:
+      ami: ami-0d277970fb2218635
+    us-west-2:
+      ami: ami-0be98fa4b8a367d2b
 
 Resources:
   ec2SingleSecurityGroup:
