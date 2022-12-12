@@ -1,7 +1,7 @@
 // Include details about any licenses and how to sign up. Provide links as appropriate.
 
-This Quick Start requires a subscription to https://aws.amazon.com/marketplace/pp/prodview-3wsytwvqb65gg?sr=0-1&ref_=beagle&applicationId=AWSMPContessa[Cribl Stream Single Instance (Free) x86_64] on the AWS Marketplace.
+This Partner Solution requires a subscription to https://aws.amazon.com/marketplace/pp/prodview-3wsytwvqb65gg?sr=0-1&ref_=beagle&applicationId=AWSMPContessa[Cribl Stream Single Instance (Free) x86_64] on the AWS Marketplace.
 
-There are no additional licenses required to use this Quick Start.
+There are no additional licenses required to use this Partner Solution.
 
-There is no cost to use this Quick Start, however you will be billed for the resources deployed. For more information see the http://general-content-file[AWS Quick Start General Content Guide].
+There is no cost to use this Partner Solution, however you will be billed for the resources deployed. For more information see the http://general-content-file[AWS Partner Solution General Content Guide].
