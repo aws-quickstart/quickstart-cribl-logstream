@@ -1,16 +1,16 @@
 :xrefstyle: short
 
-Deploying this Quick Start for a new virtual private cloud (VPC) with
+Deploying this Partner Solution for a new virtual private cloud (VPC) with
 default parameters builds the following {partner-product-short-name} environment in the
 AWS Cloud.
 
 // Replace this example diagram with your own. Follow our wiki guidelines: https://w.amazon.com/bin/view/AWS_Quick_Starts/Process_for_PSAs/#HPrepareyourarchitecturediagram. Upload your source PowerPoint file to the GitHub {deployment name}/docs/images/ directory in this repo. 
 
 [#architecture1]
-.Quick Start architecture for {partner-product-short-name} on AWS
+.Partner Solution architecture for {partner-product-short-name} on AWS
 image::../docs/deployment_guide/images/architecture_diagram.png[Architecture]
 
-As shown in <<architecture1>>, the Quick Start sets up the following:
+As shown in <<architecture1>>, the Partner Solution sets up the following:
 
 * A highly available architecture that spans two Availability Zones in your virtual private cloud (VPC).
 * An Application Load Balancer to route traffic to Cribl Stream instances.
@@ -18,4 +18,4 @@ As shown in <<architecture1>>, the Quick Start sets up the following:
 * An S3 bucket to test sending and receiving Cribl Stream data. 
 * AWS Identity and Access Management (IAM) for a role and policy providing the Cribl Stream instances access to the S3 bucket. You can add other Cribl-supported data sources and destinations by editing the IAM policy after deployment.
 
-* By default, to give users a better experience when getting started with Cribl Stream, this Quick Start deploys in a public subnet. If you're deploying this Quick Start in a production environment, consider using a private subnet.
+* By default, to give users a better experience when getting started with Cribl Stream, this Partner Solution deploys in a public subnet. If you're deploying this Partner Solution in a production environment, consider using a private subnet.

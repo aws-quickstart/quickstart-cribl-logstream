@@ -3,14 +3,14 @@
 * During deployment, you must select two Availability Zones or the deployment will fail.
 * You can use a git repository to backup your configurations. For more information, refer to https://docs.cribl.io/logstream/gitops/[GitOps on Cribl].
 
-For troubleshooting common Quick Start issues visit the http://general-content-file[AWS Quick Start General Content Guide] or the https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html[Troubleshooting CloudFormation] page in the AWS documentation.
+For troubleshooting common Partner Solution issues visit the http://general-content-file[AWS Partner Solution General Content Guide] or the https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html[Troubleshooting CloudFormation] page in the AWS documentation.
 
 == FAQ
 
-*Q.* I encountered a *CREATE_FAILED* error when I launched the Quick Start.
+*Q.* I encountered a *CREATE_FAILED* error when I launched the Partner Solution.
 
 *A.* If AWS CloudFormation fails to create the stack, relaunch the template with *Rollback on failure* set to *Disabled*. This setting is under *Advanced* in the AWS CloudFormation console on the *Configure stack options* page. With this setting, the stack’s state is retained, and the instance keeps running so that you can troubleshoot the issue. (For Windows, look at the log files in `%ProgramFiles%\Amazon\EC2ConfigService` and `C:\cfn\log`.)
-// Customize this answer if needed. For example, if you’re deploying on Linux instances, either provide the location for log files on Linux or omit the final sentence. If the Quick Start has no EC2 instances, revise accordingly (something like "and the assets keep running").
+// Customize this answer if needed. For example, if you’re deploying on Linux instances, either provide the location for log files on Linux or omit the final sentence. If the Partner Solution has no EC2 instances, revise accordingly (something like "and the assets keep running").
 
 WARNING: When you set *Rollback on failure* to *Disabled*, you continue to incur AWS charges for this stack. Delete the stack when you finish troubleshooting.
 
@@ -18,11 +18,11 @@ For more information, see https://docs.aws.amazon.com/AWSCloudFormation/latest/U
 
 *Q.* I encountered a size-limitation error when I deployed the AWS CloudFormation templates.
 
-*A.* Launch the Quick Start templates from the links in this guide or from another S3 bucket. If you deploy the templates from a local copy on your computer or from a location other than an S3 bucket, you might encounter template-size limitations. For more information, see http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html[AWS CloudFormation quotas^].
+*A.* Launch the Partner Solution templates from the links in this guide or from another S3 bucket. If you deploy the templates from a local copy on your computer or from a location other than an S3 bucket, you might encounter template-size limitations. For more information, see http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html[AWS CloudFormation quotas^].
 
-*Q.* Can I deploy this Quick Start in a different AWS Region other than the default (us-east-1)?
+*Q.* Can I deploy this Partner Solution in a different AWS Region other than the default (us-east-1)?
 
-*A.* You can enter a different Region during deployment for the `Quick Start S3 bucket Region` parameter. For any Quick Start to work in a Region other than its default Region, all the services it deploys must be supported in that Region. You can launch a Quick Start in any Region and see if it works. If you get an error such as `Unrecognized resource type,` the Quick Start is not supported in that Region. For an up-to-date list of AWS Regions and the AWS services they support, see https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/[AWS Regional Services].
+*A.* You can enter a different Region during deployment for the `Partner Solution S3 bucket Region` parameter. For any Partner Solution to work in a Region other than its default Region, all the services it deploys must be supported in that Region. You can launch a Partner Solution in any Region and see if it works. If you get an error such as `Unrecognized resource type,` the Partner Solution is not supported in that Region. For an up-to-date list of AWS Regions and the AWS services they support, see https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/[AWS Regional Services].
 
 *Q.* Can I modify the EC2 IAM policy to include other S3 buckets, Kinesis streams, or other AWS resources for my instance to access?
 
